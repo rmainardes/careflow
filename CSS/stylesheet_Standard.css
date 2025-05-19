@@ -783,25 +783,7 @@ form textarea {
     }
 }
 
-@media (max-width: 650px) {
-    #nav {
-        width: 4%;
-        min-width: 130px;
-    }
 
-    .sidebar {
-        width: 130px;
-    }
-
-    main {
-        font-size: smaller;
-    }
-
-    footer p,
-    footer a {
-        font-size: small;
-    }
-}
 
 @media (max-width: 500px) {
     #nav {

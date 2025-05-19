@@ -328,7 +328,7 @@ legend {
 
 button[type="submit"] {
   align-self: flex-start;
-  font-size: 1rem;
+
 }
 
 @media (max-width: 600px) {
@@ -344,4 +344,30 @@ button[type="submit"] {
     border: 1px solid #ccc;
     box-sizing: border-box;
   }
+}
+
+#blocoSetor {
+  display: flex;
+}
+
+#blocoCargo {
+  display: flex;
+
+}
+
+#setorFilter {
+  padding: 2px;
+  margin-left: 5px;
+  height: 30px;
+}
+
+#cargoFilter {
+  padding: 2px;
+  margin-left: 5px;
+  height: 30px;
+}
+
+label {
+  margin-bottom: 0;
+  align-self: center;
 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão Hospitalar - Escala de Funcionários</title>
     <link rel="stylesheet" href="CSS/stylesheet_Standard.css">
-    <link rel="stylesheet" href="CSS/stylesheet_cadastroprofissionais.css">
+
 
 
 </head>
@@ -31,185 +31,160 @@
 
 
     <script>
-        document.getElementById("toggleSidebar").addEventListener("click", function () {
-            const sidebarDiv = document.getElementById("nav"); // Sidebar parent div
-            const toggleButton = document.getElementById("toggleSidebar");
+        // Global variables
+        let currentCssLink = null;
 
-            if (sidebarDiv.style.display === "none") {
-                sidebarDiv.style.display = "flex"; // Show sidebar
-                toggleButton.style.display = "none"; // Hide button
-                sidebarItems.forEach(item => {
-                    item.style.display = "flex";
+        // Improved loadHTML function
+        function loadHTML(elementId, url, callback) {
+            const element = document.getElementById(elementId);
+            if (!element) {
+                console.error(`Element #${elementId} not found`);
+                return Promise.reject();
+            }
+
+            return fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error(`${url} failed: ${response.status}`);
+                    return response.text();
+                })
+                .then(html => {
+                    element.innerHTML = html;
+                    if (callback) callback();
+                    return element;
+                })
+                .catch(error => {
+                    console.error(`Error loading ${url}:`, error);
+                    element.innerHTML = `<div class="error">Failed to load ${url}</div>`;
                 });
+        }
 
-            } else {
-                sidebarDiv.style.display = "none"; // Hide sidebar
-                toggleButton.style.display = "block"; // Show button
-            }
-        });
+        // Enhanced loadPage function
+        function loadPage(pageUrl, cssFile) {
+            console.log('Loading:', pageUrl, 'with CSS:', cssFile);
 
-        document.getElementById("toggleSidebar").addEventListener("click", function () {
-            const sidebarDiv = document.getElementById("nav");
-            const toggleButton = document.getElementById("toggleSidebar");
-
-            sidebarDiv.style.display = "flex"; // Show sidebar
-            toggleButton.style.display = "none"; // Hide toggle button
-
-            const collapseBtn = document.getElementById("collapseSidebar");
-            if (collapseBtn) {
-                collapseBtn.style.display = "block"; // Show collapse button
-            }
-        });
-
-
-
-        // Ensure sidebar auto-collapses when screen gets small
-        window.addEventListener("resize", function () {
-            const sidebarDiv = document.getElementById("nav");
-            const toggleButton = document.getElementById("toggleSidebar");
-
-            if (window.innerWidth < 600) { // Adjust as needed
-                sidebarDiv.style.display = "none";
-                toggleButton.style.display = "block"; // Show button
-            } else {
-                sidebarDiv.style.display = "flex";
-                toggleButton.style.display = "none"; // Hide button
-            }
-        });
-
-        // Run once on page load to apply correct state
-        window.dispatchEvent(new Event("resize"));
-
-
-    </script>
-
-    <script>
-
-        function loadPage(button, pageUrl) {
             if (!pageUrl) {
-                console.error("Missing page URL for button:", button);
+                console.error('No page specified');
                 return;
             }
 
-            // Load main content dynamically
-            fetch(pageUrl)
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById("main-content").innerHTML = html;
+            // Load page content
+            fetch(`${pageUrl}`)
+                .then(response => {
+                    if (!response.ok) throw new Error(`Page load failed (${response.status})`);
+                    return response.text();
                 })
-                .catch(error => console.error("Error loading content:", error));
-
-            // Load corresponding header dynamically
-            fetch('headers/' + pageUrl)
-                .then(response => response.text())
                 .then(html => {
-                    document.getElementById("header").innerHTML = html;
+                    document.getElementById('main-content').innerHTML = html;
+
+                    // Load CSS if specified
+                    if (cssFile) {
+                        if (currentCssLink) currentCssLink.remove();
+
+                        currentCssLink = document.createElement('link');
+                        currentCssLink.rel = 'stylesheet';
+                        currentCssLink.href = `CSS/${cssFile}`;
+                        document.head.appendChild(currentCssLink);
+                    }
                 })
-                .catch(error => console.error("Error loading header:", error));
-
-            // Set the clicked button as active
-            document.querySelectorAll(".nav-button").forEach(btn => {
-                btn.classList.remove("active");
-            });
-            button.classList.add("active");
-        }
-
-        function loadHTML(elementId, url, callback) {
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    document.getElementById(elementId).innerHTML = this.responseText;
-                    if (callback) callback();
-                }
-            };
-            xhr.open("GET", url, true);
-            xhr.send();
-        }
-
-        // Load sidebar and add collapse button logic after loading
-        loadHTML('nav', 'navigation2.html', function () {
-            document.querySelectorAll(".nav-button").forEach(button => {
-                button.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    let page = this.getAttribute("data-page");
-                    loadPage(this, page);
+                .catch(error => {
+                    console.error('Page load error:', error);
+                    document.getElementById('main-content').innerHTML = `
+                            <div class="error">
+                                Failed to load page: ${pageUrl}
+                                <br><small>${error.message}</small>
+                            </div>`;
                 });
-            });
-        });
+        }
 
-        // Load sidebar and add collapse button logic after loading
-        loadHTML('nav', 'navigation.html', function () {
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // Initialize sidebar functionality
+        function initSidebar() {
+            const toggleButton = document.getElementById("toggleSidebar");
+            const sidebarDiv = document.getElementById("nav");
             const collapseBtn = document.getElementById("collapseSidebar");
+
+            if (toggleButton) {
+                toggleButton.addEventListener("click", function () {
+                    sidebarDiv.style.display = "flex";
+                    toggleButton.style.display = "none";
+                    if (collapseBtn) collapseBtn.style.display = "block";
+                });
+            }
+
             if (collapseBtn) {
                 collapseBtn.addEventListener("click", function () {
-                    document.getElementById("nav").style.display = "none";
-                    document.getElementById("toggleSidebar").style.display = "block";
-                    collapseBtn.style.display = "none"; // Hide collapse button again
+                    sidebarDiv.style.display = "none";
+                    if (toggleButton) toggleButton.style.display = "block";
+                    collapseBtn.style.display = "none";
                 });
             }
-        });
 
-        loadHTML('header', 'headers/headercadastropaciente.html');
-        loadHTML('main-content', 'ajustepontocontent.html');
-        loadHTML('footer', 'footer.html');
-    </script>
-
-
-
-
-
-
-
-    <script>
-        function loadPage(button, pageUrl) {
-            if (!pageUrl) {
-                console.error("Missing page URL for button:", button);
-                return;
-            }
-
-            // Load main content dynamically
-            fetch(pageUrl)
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById("main-content").innerHTML = html;
-                })
-                .catch(error => console.error("Error loading content:", error));
-
-            // Load corresponding header dynamically
-            fetch('headers/' + pageUrl)
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById("header").innerHTML = html;
-                })
-                .catch(error => console.error("Error loading header:", error));
-
-            // Set the clicked button as active
-            document.querySelectorAll(".nav-button").forEach(btn => {
-                btn.classList.remove("active");
+            window.addEventListener("resize", function () {
+                if (window.innerWidth < 600) {
+                    sidebarDiv.style.display = "none";
+                    if (toggleButton) toggleButton.style.display = "block";
+                    if (collapseBtn) collapseBtn.style.display = "none";
+                } else {
+                    sidebarDiv.style.display = "flex";
+                    if (toggleButton) toggleButton.style.display = "none";
+                    if (collapseBtn) collapseBtn.style.display = "none";
+                }
             });
-            button.classList.add("active");
+
+            window.dispatchEvent(new Event("resize"));
         }
 
-        // Attach event listeners to buttons
-        document.querySelectorAll(".nav-button").forEach(button => {
-            button.addEventListener("click", function (event) {
-                event.preventDefault(); // Prevent default link behavior
+        // Initialize navigation using event delegation
+        function initNavigation() {
+            document.addEventListener('click', function (event) {
+                // Check if clicked element or its parent is a nav-button
+                const button = event.target.closest('.nav-button');
+                if (button) {
+                    event.preventDefault();
+                    const page = button.getAttribute('data-page');
+                    const css = button.getAttribute('data-css');
 
-                let page = this.getAttribute("data-page"); // Get the associated page
-                loadPage(this, page);
+                    // Update active state
+                    document.querySelectorAll('.nav-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    button.classList.add('active');
+
+                    // Load the page
+                    loadPage(page, css);
+                }
             });
+        }
+
+        // Main initialization
+        document.addEventListener("DOMContentLoaded", function () {
+            // Load navigation first
+            loadHTML('nav', 'navigation2.html')
+                .then(() => {
+                    initSidebar();
+                    initNavigation();
+                })
+                .catch(error => console.error('Navigation failed:', error));
+
+            // Load other components
+            loadHTML('header', 'headers/headercadastropaciente.html');
+            loadHTML('main-content', 'ajustepontocontent.html');
+            loadHTML('footer', 'footer.html');
         });
-        document.addEventListener("click", function (event) {
-            if (event.target.classList.contains("nav-button")) {
-                event.preventDefault();
-                let page = event.target.getAttribute("data-page");
-                loadPage(event.target, page);
-            }
-        });
-
-
-
     </script>
+
     <script>
         function filtrar() {
             var filterBox = document.querySelector('.filter-box');
@@ -231,6 +206,45 @@
                 }, 150);
             }
         }
+
+
+
+    </script>
+    <script>
+        // In your index.html's main script
+
+
+        function initDynamicContent() {
+            // Initialize charts if elements exist
+            if (document.getElementById('chartPontoBarra')) {
+                mostrarGraficoPonto('bar');
+            }
+
+            // Reattach event listeners
+            document.querySelectorAll('.chart-toggle-buttons button').forEach(btn => {
+                btn.onclick = function () {
+                    mostrarGraficoPonto(this.textContent.includes('Horas') ? 'bar' : 'line');
+                };
+            });
+
+            document.getElementById('filtrarButton').onclick = toggleFiltros;
+        }
+
+        // Make these functions globally available
+        window.mostrarGraficoPonto = function (tipo) {
+            // Your existing chart function...
+        };
+
+        window.toggleFiltros = function () {
+            const filtros = document.querySelector('.filter-box');
+            if (filtros.classList.contains("hidden")) {
+                filtros.classList.remove("hidden");
+                document.getElementById('filtrarButton').textContent = "Ocultar Filtros";
+            } else {
+                filtros.classList.add("hidden");
+                document.getElementById('filtrarButton').textContent = "Filtrar";
+            }
+        };
     </script>
 </body>
 
