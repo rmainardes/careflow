@@ -139,6 +139,19 @@
             }
         });
 
+        document.getElementById("toggleSidebar").addEventListener("click", function () {
+            const sidebarDiv = document.getElementById("nav");
+            const toggleButton = document.getElementById("toggleSidebar");
+
+            sidebarDiv.style.display = "flex"; // Show sidebar
+            toggleButton.style.display = "none"; // Hide toggle button
+
+            const collapseBtn = document.getElementById("collapseSidebar");
+            if (collapseBtn) {
+                collapseBtn.style.display = "block"; // Show collapse button
+            }
+        });
+
         // Ensure sidebar auto-collapses when screen gets small
         window.addEventListener("resize", function () {
             const sidebarDiv = document.getElementById("nav");
@@ -160,19 +173,31 @@
     </script>
 
     <script>
-        function loadHTML(elementId, url) {
+        function loadHTML(elementId, url, callback) {
             const xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
                     document.getElementById(elementId).innerHTML = this.responseText;
+                    if (callback) callback();
                 }
             };
             xhr.open("GET", url, true);
             xhr.send();
         }
-        loadHTML('nav', 'navigation.html');
-        loadHTML('header', 'headers/headerajusteponto.html');
 
+        // Load sidebar and add collapse button logic after loading
+        loadHTML('nav', 'navigation.html', function () {
+            const collapseBtn = document.getElementById("collapseSidebar");
+            if (collapseBtn) {
+                collapseBtn.addEventListener("click", function () {
+                    document.getElementById("nav").style.display = "none";
+                    document.getElementById("toggleSidebar").style.display = "block";
+                    collapseBtn.style.display = "none"; // Hide collapse button again
+                });
+            }
+        });
+
+        loadHTML('header', 'headers/headercadastropaciente.html');
         loadHTML('footer', 'footer.html');
     </script>
 

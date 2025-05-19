@@ -151,6 +151,41 @@
             display: none;
             margin-bottom: 0;
         }
+
+        @media (max-width: 550px) {
+            #labelFiltroData {
+                font-size: x-small;
+            }
+
+            #Label1 {
+                font-size: x-small;
+            }
+
+            .chart-toggle-buttons {
+                display: flex;
+                justify-content: space-around;
+                margin-left: 0;
+                margin-right: 0;
+                width: 100%;
+            }
+
+            #filter-boxid {
+                width: 50vw !important;
+                min-height: 80px;
+            }
+
+            #filtrarButton {
+                padding-top: 3px;
+                padding-bottom: 3px;
+            }
+
+            button {
+                height: 30px !important;
+                min-height: 30px;
+                padding-top: 3px;
+                padding-bottom: 3px;
+            }
+        }
     </style>
 </head>
 
@@ -177,7 +212,7 @@
 
                                 <div class="filter-box hidden" id="filter-boxid">
                                     <div class="filtro-item">
-                                        <label for="filtrofuncionario">Filtrar por funcionário:</label>
+                                        <label for="filtrofuncionario" id="Label1">Filtrar por funcionário:</label>
                                         <input type="text" id="filtrofuncionario"
                                             placeholder="Digite o nome do funcionário" />
                                     </div>
@@ -386,20 +421,22 @@
         }
     </script>
     <script>
-        function loadHTML(elementId, url) {
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    document.getElementById(elementId).innerHTML = this.responseText;
-                }
-            };
-            xhr.open("GET", url, true);
-            xhr.send();
-        }
-        loadHTML('nav', 'navigation.html');
-        loadHTML('header', 'headers/headerregistroponto.html');
+        function showTab(tabId) {
+            // Hide all content sections
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('visible');
+            });
 
-        loadHTML('footer', 'footer.html');
+            // Show selected section
+            document.getElementById(tabId).classList.add('visible');
+
+            // Highlight active tab
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active-tab');
+            });
+
+            event.target.classList.add('active-tab');
+        }
     </script>
     <script>
         document.getElementById("toggleSidebar").addEventListener("click", function () {
@@ -416,6 +453,19 @@
             } else {
                 sidebarDiv.style.display = "none"; // Hide sidebar
                 toggleButton.style.display = "block"; // Show button
+            }
+        });
+
+        document.getElementById("toggleSidebar").addEventListener("click", function () {
+            const sidebarDiv = document.getElementById("nav");
+            const toggleButton = document.getElementById("toggleSidebar");
+
+            sidebarDiv.style.display = "flex"; // Show sidebar
+            toggleButton.style.display = "none"; // Hide toggle button
+
+            const collapseBtn = document.getElementById("collapseSidebar");
+            if (collapseBtn) {
+                collapseBtn.style.display = "block"; // Show collapse button
             }
         });
 
@@ -438,6 +488,37 @@
 
 
     </script>
+
+    <script>
+        function loadHTML(elementId, url, callback) {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById(elementId).innerHTML = this.responseText;
+                    if (callback) callback();
+                }
+            };
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+
+        // Load sidebar and add collapse button logic after loading
+        loadHTML('nav', 'navigation.html', function () {
+            const collapseBtn = document.getElementById("collapseSidebar");
+            if (collapseBtn) {
+                collapseBtn.addEventListener("click", function () {
+                    document.getElementById("nav").style.display = "none";
+                    document.getElementById("toggleSidebar").style.display = "block";
+                    collapseBtn.style.display = "none"; // Hide collapse button again
+                });
+            }
+        });
+
+        loadHTML('header', 'headers/headercadastropaciente.html');
+        loadHTML('footer', 'footer.html');
+    </script>
+
+
     <script>
         function filtrar() {
             var filterBox = document.querySelector('.filter-boxid');

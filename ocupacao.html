@@ -88,7 +88,7 @@
 
         #chartLeitosPizza,
         #chartLeitosLinha {
-            margin-top: 5vh;
+            margin-top: 7vh;
         }
 
         .lista-container {
@@ -99,6 +99,17 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
+        }
+
+        #chartLeitosPizza {
+            width: 35% !important;
+            height: 35% !important;
+            margin-bottom: 15px;
+            margin-top: 5px;
+        }
+
+        .chart-container {
+            height: 40vh;
         }
     </style>
 </head>
@@ -308,6 +319,24 @@
         }
     </script>
     <script>
+        function showTab(tabId) {
+            // Hide all content sections
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('visible');
+            });
+
+            // Show selected section
+            document.getElementById(tabId).classList.add('visible');
+
+            // Highlight active tab
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active-tab');
+            });
+
+            event.target.classList.add('active-tab');
+        }
+    </script>
+    <script>
         document.getElementById("toggleSidebar").addEventListener("click", function () {
             const sidebarDiv = document.getElementById("nav"); // Sidebar parent div
             const toggleButton = document.getElementById("toggleSidebar");
@@ -322,6 +351,19 @@
             } else {
                 sidebarDiv.style.display = "none"; // Hide sidebar
                 toggleButton.style.display = "block"; // Show button
+            }
+        });
+
+        document.getElementById("toggleSidebar").addEventListener("click", function () {
+            const sidebarDiv = document.getElementById("nav");
+            const toggleButton = document.getElementById("toggleSidebar");
+
+            sidebarDiv.style.display = "flex"; // Show sidebar
+            toggleButton.style.display = "none"; // Hide toggle button
+
+            const collapseBtn = document.getElementById("collapseSidebar");
+            if (collapseBtn) {
+                collapseBtn.style.display = "block"; // Show collapse button
             }
         });
 
@@ -346,20 +388,49 @@
     </script>
 
     <script>
-        function loadHTML(elementId, url) {
+        function loadHTML(elementId, url, callback) {
             const xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
                     document.getElementById(elementId).innerHTML = this.responseText;
+                    if (callback) callback();
                 }
             };
             xhr.open("GET", url, true);
             xhr.send();
         }
-        loadHTML('nav', 'navigation.html');
-        loadHTML('header', 'headers/headerocupacao.html');
 
+        // Load sidebar and add collapse button logic after loading
+        loadHTML('nav', 'navigation.html', function () {
+            const collapseBtn = document.getElementById("collapseSidebar");
+            if (collapseBtn) {
+                collapseBtn.addEventListener("click", function () {
+                    document.getElementById("nav").style.display = "none";
+                    document.getElementById("toggleSidebar").style.display = "block";
+                    collapseBtn.style.display = "none"; // Hide collapse button again
+                });
+            }
+        });
+
+        loadHTML('header', 'headers/headercadastropaciente.html');
         loadHTML('footer', 'footer.html');
+    </script>
+
+    <script>
+        function filtrar() {
+            var filterBox = document.querySelector('.filter-box');
+            if (filterBox.classList.contains('visible')) {
+                filterBox.classList.remove('visible');
+                setTimeout(function () {
+                    filterBox.style.display = 'none'; // Hide after transition
+                }, 250); // Timeout matches the transition duration
+            } else {
+                filterBox.style.display = 'block'; // Display right away
+                setTimeout(function () {
+                    filterBox.classList.add('visible');
+                }, 0); // Immediate change to visible state
+            }
+        }
     </script>
 
     <script>

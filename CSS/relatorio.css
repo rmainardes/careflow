@@ -1,0 +1,254 @@
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+main .form-row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+main .form-row > div {
+  flex: 1 1 calc(33.333% - 20px);
+}
+
+@media (max-width: 768px) {
+  main .form-row > div {
+    flex: 1 1 100%;
+  }
+}
+
+main .form-row-2 {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+main .form-row-2 > div {
+  flex: 1 1 calc(50% - 20px);
+}
+
+@media (max-width: 768px) {
+  main .form-row-2 > div {
+    flex: 1 1 100%;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+main label {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  color: #333333;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+main input[type="text"],
+main input[type="tel"],
+main input[type="date"],
+main select {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s;
+  font-family: 'Poppins', sans-serif;
+}
+
+main input:focus,
+main select:focus {
+  border-color: #0055A5;
+  box-shadow: 0 0 4px rgba(0, 85, 165, 0.3);
+  outline: none;
+}
+
+main select[multiple] {
+  height: auto;
+  min-height: 100px;
+}
+
+@media (min-width: 768px) {
+  main .form-row-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  main .form-row-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  main .form-row-2,
+  main .form-row-3 {
+    display: block;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+main .tab-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+main .tab {
+  padding: 10px 20px;
+  background-color: #2c3e50;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+main .tab:hover {
+  background-color: #34495e;
+}
+
+main .active-tab {
+  background-color: #1abc9c;
+}
+
+main .content-container {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+main .content {
+  display: none;
+}
+
+main .content.visible {
+  display: block;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+main label {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  color: #333333;
+  font-weight: 500;
+}
+
+main input[type="text"],
+main input[type="tel"],
+main input[type="date"],
+main select {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s;
+}
+
+main input:focus,
+main select:focus {
+  border-color: #0055A5;
+  box-shadow: 0 0 4px rgba(0, 85, 165, 0.3);
+  outline: none;
+}
+
+main select[multiple] {
+  height: auto;
+  min-height: 100px;
+}
+
+main .form-row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  main .form-row-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  main .tab-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  main .tab {
+    width: 100%;
+    text-align: center;
+  }
+
+  main .content-container {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 10px;
+  }
+
+  main .tab {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  main .content-container {
+    padding: 10px;
+  }
+}
