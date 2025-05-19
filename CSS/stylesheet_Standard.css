@@ -574,7 +574,8 @@ main {
     justify-self: center;
     list-style: none;
     margin: 0;
-    margin-bottom: 30vh;
+    margin-bottom: 14vh;
+    margin-top: 3vh;
 }
 
 .sidebar li {
@@ -614,6 +615,9 @@ main {
     visibility: hidden;
 }
 
+.sidebar button {
+    padding: 3px;
+}
 
 
 /* Media query for smaller screens */

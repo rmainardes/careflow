@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<style>
+    .button-group {
+        justify-content: space-between;
+        flex-direction: row;
+        margin-top: 0;
+    }
+
+    form {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-row {
+        padding-left: 0;
+    }
+
+    #divMotivo {
+        width: 100%;
+    }
+</style>
+
+<body>
+    <section class="divInterna">
+        <form class="form-container">
+            <!-- Profissional e Tipo de Ajuste -->
+            <div class="form-row">
+                <div class="form-group medium">
+                    <label for="profissional">Profissional</label>
+                    <input list="listaProfissionais" id="profissional" name="profissional"
+                        placeholder="Digite o nome..." required />
+                    <datalist id="listaProfissionais">
+                        <option value="João da Silva">
+                        <option value="Maria Oliveira">
+                        <option value="Carlos Souza">
+                        <option value="Ana Paula">
+                        <option value="Fernanda Lima">
+                    </datalist>
+                </div>
+                <div class="form-group medium">
+                    <label for="tipoAjuste">Tipo de Ajuste</label>
+                    <select id="tipoAjuste" name="tipoAjuste" required>
+                        <option value="">Selecione</option>
+                        <option value="entrada">Entrada</option>
+                        <option value="saida">Saída</option>
+                        <option value="intervalo">Intervalo</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Data de lançamento e Quantidade de horas -->
+            <div class="form-row">
+                <div class="form-group medium">
+                    <label for="dataLancamento">Data de Lançamento</label>
+                    <input type="date" id="dataLancamento" name="dataLancamento" required />
+                </div>
+                <div class="form-group medium">
+                    <label for="horas">Quantidade de Horas</label>
+                    <input type="number" id="horas" name="horas" step="0.01" placeholder="Ex: 4.5" required />
+                </div>
+            </div>
+
+            <!-- Motivo ocupando linha inteira -->
+            <div class="form-group long" id="divMotivo">
+                <label for="motivo">Motivo</label>
+                <textarea id="motivo" name="motivo" rows="3" placeholder="Descreva o motivo do ajuste..."
+                    required></textarea>
+            </div>
+
+            <!-- Botões -->
+            <div class="form-row">
+                <div class="form-group button-group">
+                    <button type="reset">Limpar</button>
+                    <button type="submit">Salvar</button>
+                </div>
+            </div>
+        </form>
+
+</body>
+
+</html>
