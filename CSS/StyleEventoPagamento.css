@@ -1,0 +1,110 @@
+/* main_style_override.css */
+
+
+
+.transaction-card {
+
+  min-width: 370px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.transaction-card h2 {
+  font-size: 1.6rem;
+  color: #2c3e50;
+  padding-bottom: 0.5rem;
+}
+
+.transaction-card dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.transaction-card .row {
+  display: contents;
+}
+
+.transaction-card dt {
+  font-weight: bold;
+  color: #34495e;
+}
+
+.transaction-card dd {
+  margin: 0;
+  color: #2d3436;
+  word-break: break-word;
+}
+
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  /* Keeps content aligned */
+  flex-wrap: nowrap;
+  /* Allows wrapping if needed */
+  gap: 10px;
+  /* Adds space between items */
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+  /* Prevents wrapping */
+}
+
+.row dt {
+  min-width: 100px;
+  /* Adjust to fit your content */
+  flex-shrink: 0;
+  /* Prevents shrinking */
+  font-weight: bold;
+}
+
+.row dd {
+  min-width: 100px;
+  flex-grow: 1;
+  /* Ensures it expands within available space */
+  text-align: right;
+}
+
+#divInterna {
+  min-width: 370px;
+}
+
+@media (max-width: 450px) {
+
+  .transaction-card dl,
+  .transaction-card dt {
+    font-size: small;
+    width: 150px;
+  }
+
+  .transaction-card h2 {
+    font-size: 20px;
+  }
+
+  .transaction-card {
+    min-width: 65vw;
+  }
+}
+
+
+@media (max-width: 398px) {
+
+  .transaction-card dl,
+  .transaction-card dt {
+    font-size: x-small;
+    width: 100px;
+  }
+
+  .transaction-card h2 {
+    font-size: 17px;
+  }
+
+  .transaction-card {
+    width: 67vw;
+    min-width: 210px;
+  }
+}

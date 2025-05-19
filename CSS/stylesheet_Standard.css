@@ -1,0 +1,883 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@700&display=swap');
+
+
+button {
+    font: bold 16px 'Montserrat', sans-serif;
+    margin: 10px;
+    padding: 0 20px 10px 20px;
+    line-height: 1.1rem;
+    white-space: nowrap;
+    align-content: center;
+    all: unset;
+    display: inline-block;
+    padding: 10px;
+
+    vertical-align: middle;
+    box-sizing: border-box;
+    min-width: 80px;
+    place-items: center;
+    background-color: #2c3e50;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 40px;
+    flex-shrink: 0;
+    align-self: center;
+    align-items: center;
+    text-align: center;
+}
+
+@media (max-width: 700px) {
+    button {
+        display: flex;
+        height: 25px;
+        align-items: center;
+    }
+}
+
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+
+
+body {
+    font-family: 'Montserrat', 'Poppins', Arial, sans-serif;
+    background-color: #FFFFFF;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+.footer-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    font-size: clamp(0.8em, 2.5vw, 0.9em);
+    line-height: 1.5;
+}
+
+footer {
+
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    height: 100px
+}
+
+footer p {
+    margin: 8px 0;
+    color: #ffffff;
+    font-size: clamp(0.8em, 3vw, 0.9em);
+}
+
+footer a {
+    font-size: clamp(0.85em, 2.5vw, 0.95em);
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+footer a:hover {
+    color: #ffcc00;
+}
+
+header,
+nav,
+footer {
+    background-color: #2c3e50;
+    color: #FFFFFF;
+
+}
+
+header {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #2c3e50;
+    color: #FFFFFF;
+    padding: 15px 0;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.divInterna {
+    padding: 15px;
+    background-color: #F8F8F8;
+    border-radius: 5px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+}
+
+p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #F0F0F0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    margin-bottom: 1.8vh;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form button {
+    background-color: #2c3e50;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    min-height: 40px;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0055A5;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    /* Horizontally centers items */
+    align-items: center;
+    /* Vertically centers items */
+    background-color: #2c3e50;
+    transition: all 0.3s ease;
+    height: 100vh;
+    /* Adjust based on your layout */
+}
+
+nav a {
+    font-family: 'Montserrat', sans-serif;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-size: 1em;
+    white-space: nowrap;
+}
+
+
+
+a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    color: #0055A5;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    color: #2c3e50;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #FF6600;
+}
+
+
+
+article {
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #F0F0F0;
+    border-radius: 5px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+ul,
+ol {
+    margin: 20px;
+    padding-left: 1px;
+}
+
+ul li,
+ol li {
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 10px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    border-color: #2c3e50;
+    outline: none;
+}
+
+.card {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.card-description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: #555555;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #CCCCCC;
+}
+
+
+
+table tr:nth-child(even) {
+    background-color: #F0F0F0;
+}
+
+table tr:hover {
+    background-color: lightgrey;
+    color: #2c3e50;
+    cursor: pointer;
+}
+
+table th {
+    background-color: #2c3e50;
+    color: #FFFFFF;
+    cursor: initial;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    color: #FFFFFF;
+}
+
+.alert.success {
+    background-color: #4CAF50;
+}
+
+.alert.error {
+    background-color: #FF0000;
+}
+
+.alert.info {
+    background-color: #2196F3;
+}
+
+.alert.warning {
+    background-color: #FF9800;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #2c3e50;
+    color: #FFFFFF;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    gap: 20px;
+    margin: 0;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.button-group {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+button:hover {
+    background-color: #0055A5;
+}
+
+/* Form Groups */
+
+
+/* Form Elements */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #2c3e50;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.1);
+}
+
+/* Button Row */
+.form-row:last-child {
+    margin-top: 1.3vh;
+    justify-content: flex-end;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .form-group {
+        min-width: 100%;
+    }
+
+    .form-row {
+        gap: 15px;
+    }
+}
+
+
+
+header h1 {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+    font-size: clamp(0.7em, 4vw, 1.8em);
+    white-space: nowrap;
+    transition: font-size 0.2s ease;
+}
+
+header img {
+    margin-top: 15px;
+    width: 7%;
+}
+
+/* Responsive adjustment */
+@media (max-width: 900px) {
+    header h1 {
+        font-size: 1.3em;
+    }
+}
+
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.2em;
+
+        margin-left: 6%;
+
+        /* Smaller font */
+        /* Keep all other header styles the same */
+    }
+
+    /* Optional: adjust padding if needed */
+    header {
+        padding: 20px 0;
+        /* May need tweaking */
+    }
+}
+
+
+
+
+/* Responsive adjustment with smooth transition */
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+
+
+    nav a {
+        font-size: 0.85em;
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+
+
+    }
+
+    nav a {
+        width: 90%;
+        /* Full-width links */
+        text-align: center;
+        margin: 3px 0;
+        font-size: 0.8em;
+        padding: 8px 5px;
+    }
+}
+
+.layout {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+#header,
+#footer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.main-container {
+    position: relative;
+    display: flex;
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+    align-content: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    /* This prevents any scrolling of the container itself */
+}
+
+main {
+    flex: 1;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    position: relative;
+    overflow-y: auto;
+    /* This enables vertical scrolling */
+    max-height: 100%;
+    /* Ensures it doesn't exceed container height */
+}
+
+#nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 5%;
+    /* Default width */
+    min-width: 220px;
+    /* Ensures it doesn't shrink too much */
+    background-color: #2c3e50;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.sidebar {
+    width: 150px;
+    background-color: #2c3e50;
+    display: flex;
+    /* Enables flexbox */
+    flex-direction: column;
+    /* Stacks items vertically */
+    align-items: center;
+    /* Centers items horizontally */
+    justify-content: center;
+    /* Centers items vertically */
+    height: 100vh;
+    /* Adjust height if needed */
+}
+
+.sidebar ul {
+    align-self: center;
+    justify-self: center;
+    list-style: none;
+    margin: 0;
+    margin-bottom: 30vh;
+}
+
+.sidebar li {
+    margin-bottom: 50px;
+}
+
+.sidebar a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #1abc9c;
+    font-weight: 700;
+}
+
+.filter-box {
+    background-color: whitesmoke;
+    border: 1px solid lightgray;
+    padding: 5px;
+    /* Properly define the border: width, style, and color */
+    justify-content: space-between;
+    align-items: center;
+    height: 3.5em;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.25s ease;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.filter-box.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+
+/* Media query for smaller screens */
+@media (max-width: 900px) {
+    #nav {
+        overflow-x: hidden;
+        width: 5%;
+        /* Reduce width */
+        min-width: 190px;
+        /* Adjust minimum width */
+    }
+
+    main {
+        font-size: small;
+    }
+
+}
+
+@media (max-width: 411px) {
+
+    footer a,
+    p {
+        display: none;
+    }
+
+}
+
+@media (max-width: 780px) {
+    #nav {
+        overflow-x: hidden;
+        width: 4%;
+        /* Shrink further */
+        min-width: 130px;
+        /* Keep it readable */
+    }
+
+    .sidebar {
+        width: 130px;
+    }
+
+    main {
+        font-size: x-small;
+    }
+}
+
+
+@media (max-height:600px) {
+    .sidebar li {
+        margin-bottom: 20px;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form textarea {
+        margin-bottom: 0;
+    }
+
+}
+
+@media (max-width:615px) {
+
+    footer p,
+    a {
+        font-size: x-small;
+    }
+}
+
+@media (max-height: 500px) {
+    .sidebar li {
+        margin-bottom: 7px;
+    }
+}
+
+
+
+
+@media (max-width: 580px) {
+    form button {
+        padding: 6px 6px;
+        font-size: 12px;
+
+    }
+
+    #rightSide button {
+        padding: 6px 6px;
+        font-size: 12px;
+
+    }
+}
+
+#rightside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#nav img {
+    padding: 10px;
+    min-width: 90px;
+}
+
+#divButton {
+    display: flex;
+    align-self: center;
+    background-color: #2c3e50;
+    height: 100%;
+    align-items: center;
+}
+
+#toggleSidebar {
+    width: 40px;
+    min-width: 40px;
+}
+
+/* Add these transition properties to elements that change */
+#nav,
+.sidebar,
+main,
+footer a,
+footer p,
+.sidebar li,
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Media query adjustments with more gradual steps */
+@media (max-width: 1024px) {
+
+    /* First step in responsive adjustment */
+    #nav {
+        width: 7%;
+        min-width: 210px;
+    }
+
+    main {
+        font-size: small;
+    }
+}
+
+@media (max-width: 900px) {
+
+    /* More subtle change from previous step */
+    #nav {
+        width: 6%;
+        min-width: 190px;
+    }
+}
+
+@media (max-width: 780px) {
+    #nav {
+        width: 5%;
+        min-width: 160px;
+    }
+
+    .sidebar {
+        width: 160px;
+    }
+}
+
+@media (max-width: 650px) {
+    #nav {
+        width: 4%;
+        min-width: 130px;
+    }
+
+    .sidebar {
+        width: 130px;
+    }
+
+    main {
+        font-size: smaller;
+    }
+
+    footer p,
+    footer a {
+        font-size: small;
+    }
+}
+
+@media (max-width: 500px) {
+    #nav {
+        min-width: 110px;
+    }
+
+    .sidebar {
+        width: 110px;
+    }
+
+    footer p,
+    footer a {
+        font-size: x-small;
+    }
+}
+
+@media (max-width: 411px) {
+
+    footer a,
+    footer p {
+        opacity: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+    }
+}
+
+/* Height-based adjustments with transitions */
+@media (max-height: 800px) {
+    .sidebar li {
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-height: 700px) {
+    .sidebar li {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-height: 600px) {
+    .sidebar li {
+        margin-bottom: 15px;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form textarea {
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-height: 500px) {
+    .sidebar li {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-height: 400px) {
+    .sidebar li {
+        margin-bottom: 7px;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form textarea {
+        margin-bottom: 2px;
+    }
+}
+
+button:hover,
+button.active {
+    background-color: #1abc9c;
+    color: #fff;
+    font-weight: bold;
+}
+
+#toggleSidebar {
+    height: 40px;
+}

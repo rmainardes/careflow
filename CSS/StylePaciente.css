@@ -1,0 +1,44 @@
+#header,
+#footer {
+    height: 100px;
+    background-color: #ddd;
+}
+
+.main-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+
+
+
+.form-row {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+    gap: 10px;
+}
+
+.form-group {
+    flex: 1;
+    margin: 0 0.5em;
+}
+
+/* Botões */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+button {
+    padding: 1em 1em;
+    margin: 0;
+}
+
+/* Evita botão com margem empurrando outro */
+button:first-child {
+    margin-right: 0;
+}

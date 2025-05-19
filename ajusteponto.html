@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão Hospitalar - Escala de Funcionários</title>
+    <link rel="stylesheet" href="CSS/stylesheet_Standard.css">
+    <link rel="stylesheet" href="CSS/stylesheet_cadastroprofissionais.css">
+
+    <style>
+        .button-group {
+            justify-content: space-between;
+            flex-direction: row;
+            margin-top: 0;
+        }
+
+        form {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-row {
+            padding-left: 0;
+        }
+
+        #divMotivo {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <div id="nav">
+        </div>
+        <div id="rightside">
+            <div id="header"></div>
+            <div class="main-container">
+                <div id="divButton">
+                    <button id="toggleSidebar">☰</button>
+                </div>
+                <main>
+                    <section class="divInterna">
+                        <form class="form-container">
+                            <!-- Profissional e Tipo de Ajuste -->
+                            <div class="form-row">
+                                <div class="form-group medium">
+                                    <label for="profissional">Profissional</label>
+                                    <input list="listaProfissionais" id="profissional" name="profissional"
+                                        placeholder="Digite o nome..." required />
+                                    <datalist id="listaProfissionais">
+                                        <option value="João da Silva">
+                                        <option value="Maria Oliveira">
+                                        <option value="Carlos Souza">
+                                        <option value="Ana Paula">
+                                        <option value="Fernanda Lima">
+                                    </datalist>
+                                </div>
+                                <div class="form-group medium">
+                                    <label for="tipoAjuste">Tipo de Ajuste</label>
+                                    <select id="tipoAjuste" name="tipoAjuste" required>
+                                        <option value="">Selecione</option>
+                                        <option value="entrada">Entrada</option>
+                                        <option value="saida">Saída</option>
+                                        <option value="intervalo">Intervalo</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Data de lançamento e Quantidade de horas -->
+                            <div class="form-row">
+                                <div class="form-group medium">
+                                    <label for="dataLancamento">Data de Lançamento</label>
+                                    <input type="date" id="dataLancamento" name="dataLancamento" required />
+                                </div>
+                                <div class="form-group medium">
+                                    <label for="horas">Quantidade de Horas</label>
+                                    <input type="number" id="horas" name="horas" step="0.01" placeholder="Ex: 4.5"
+                                        required />
+                                </div>
+                            </div>
+
+                            <!-- Motivo ocupando linha inteira -->
+                            <div class="form-group long" id="divMotivo">
+                                <label for="motivo">Motivo</label>
+                                <textarea id="motivo" name="motivo" rows="3"
+                                    placeholder="Descreva o motivo do ajuste..." required></textarea>
+                            </div>
+
+                            <!-- Botões -->
+                            <div class="form-row">
+                                <div class="form-group button-group">
+                                    <button type="reset">Limpar</button>
+                                    <button type="submit">Salvar</button>
+                                </div>
+                            </div>
+                        </form>
+
+                </main>
+            </div>
+            <div id="footer"></div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all content sections
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('visible');
+            });
+
+            // Show selected section
+            document.getElementById(tabId).classList.add('visible');
+
+            // Highlight active tab
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active-tab');
+            });
+
+            event.target.classList.add('active-tab');
+        }
+    </script>
+    <script>
+        document.getElementById("toggleSidebar").addEventListener("click", function () {
+            const sidebarDiv = document.getElementById("nav"); // Sidebar parent div
+            const toggleButton = document.getElementById("toggleSidebar");
+
+            if (sidebarDiv.style.display === "none") {
+                sidebarDiv.style.display = "flex"; // Show sidebar
+                toggleButton.style.display = "none"; // Hide button
+                sidebarItems.forEach(item => {
+                    item.style.display = "flex";
+                });
+
+            } else {
+                sidebarDiv.style.display = "none"; // Hide sidebar
+                toggleButton.style.display = "block"; // Show button
+            }
+        });
+
+        // Ensure sidebar auto-collapses when screen gets small
+        window.addEventListener("resize", function () {
+            const sidebarDiv = document.getElementById("nav");
+            const toggleButton = document.getElementById("toggleSidebar");
+
+            if (window.innerWidth < 600) { // Adjust as needed
+                sidebarDiv.style.display = "none";
+                toggleButton.style.display = "block"; // Show button
+            } else {
+                sidebarDiv.style.display = "flex";
+                toggleButton.style.display = "none"; // Hide button
+            }
+        });
+
+        // Run once on page load to apply correct state
+        window.dispatchEvent(new Event("resize"));
+
+
+    </script>
+
+    <script>
+        function loadHTML(elementId, url) {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById(elementId).innerHTML = this.responseText;
+                }
+            };
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+        loadHTML('nav', 'navigation.html');
+        loadHTML('header', 'headers/headerajusteponto.html');
+
+        loadHTML('footer', 'footer.html');
+    </script>
+
+    <script>
+        function filtrar() {
+            var filterBox = document.querySelector('.filter-box');
+            if (filterBox.classList.contains('visible')) {
+                filterBox.classList.remove('visible');
+                setTimeout(function () {
+                    filterBox.style.display = 'none'; // Hide after transition
+                }, 250); // Timeout matches the transition duration
+            } else {
+                filterBox.style.display = 'block'; // Display right away
+                setTimeout(function () {
+                    filterBox.classList.add('visible');
+                }, 0); // Immediate change to visible state
+            }
+        }
+    </script>
+</body>
+
+</html>

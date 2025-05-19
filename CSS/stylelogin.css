@@ -1,0 +1,81 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  /* Evita scroll lateral */
+}
+
+main.login-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("imagens/imagem2.png");
+  /* Caminho da imagem */
+  background-size: cover;
+  background-position: center -110px;
+  background-repeat: no-repeat;
+  background-color: #2c3e50;
+  /* Fallback */
+  overflow-y: auto;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* em vez de 99.2vh */
+  width: 100vw;
+  /* em vez de 99.2vw */
+  overflow: hidden;
+}
+
+/* Ajustes no formulário */
+.login-container section {
+  background-color: #ffffff;
+  padding: 2em;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  /* <-- Aqui você controla a largura desejada */
+  max-width: 90%;
+  margin-top: 110px;
+}
+
+form {
+  margin: 10px auto;
+  /* era 20px */
+  padding: 10px;
+  /* era 20px */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Inputs e elementos do formulário */
+form label,
+form input,
+form button,
+.forgot-password {
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+/* Grupo de linhas do formulário */
+.form-row {
+  margin-bottom: 0.5em;
+  /* era 1em */
+  gap: 10px;
+  /* era 15~20px */
+}
+
+.form-group {
+  margin: 0 0.5em;
+  /* reduz lateralmente */
+}
+
+/* Cabeçalho */
+header h1 {
+  font-size: clamp(1em, 3vw, 1.5em);
+}

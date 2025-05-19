@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão Hospitalar - Escala de Funcionários</title>
+    <link rel="stylesheet" href="CSS/stylesheet_Standard.css">
+    <link rel="stylesheet" href="CSS/style_registroponto.css" />
+    <style>
+        .divInterna {
+            width: fit-content;
+            min-width: 212px;
+        }
+
+        h2 {
+            justify-self: center;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        #submitEscala {
+            margin-left: auto;
+            justify-self: right;
+        }
+
+        #novoRegistroButton {
+            margin-left: auto;
+            margin-right: 15px;
+        }
+
+        #filtrarButton,
+        #novoRegistroButton,
+        #deleteButton {
+            padding: 10px;
+        }
+
+        #deleteButton {
+            align-content: center;
+            vertical-align: middle;
+            margin-left: 5px;
+            margin-bottom: 2px;
+            margin-right: 2px;
+            display: flex;
+            align-items: center;
+            background-color: brown;
+        }
+
+        h2 {
+            justify-self: center;
+        }
+
+        #listaFuncionarios {
+            width: 60vw;
+        }
+
+        #employeeFilter {
+            width: 30vw;
+            margin-left: 10px;
+
+
+        }
+
+        #filter-boxid {
+            width: fit-content;
+            justify-self: center;
+        }
+
+        .filter-box.visible {
+            display: block;
+            opacity: 1;
+            width: fit-content;
+        }
+
+        .filter-box.hidden {
+            display: none;
+            opacity: 0;
+            width: 0;
+        }
+
+        .container {
+            height: 100%;
+        }
+
+        h2 {
+            justify-self: center;
+        }
+
+        .filter-box {
+            margin-right: 0;
+            margin-top: 10px;
+            height: 65px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            justify-self: center;
+            align-self: center;
+        }
+
+        #listaFuncionarios {
+            display: flex;
+            justify-content: center;
+        }
+
+        main {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            /* Center horizontally */
+            padding: 20px 0;
+            /* Add some vertical padding */
+        }
+
+        .divInterna {
+            width: fit-content;
+            max-width: 1200px;
+            /* Set a maximum width */
+            display: flex;
+            justify-content: center;
+        }
+
+        #listaFuncionarios {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Center children horizontally */
+            padding: 0 20px;
+            /* Add horizontal padding */
+            box-sizing: border-box;
+        }
+
+        #filter-boxid {
+            display: none;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="layout">
+        <div id="nav">
+        </div>
+        <div id="rightside">
+            <div id="header"></div>
+            <div class="main-container">
+                <div id="divButton">
+                    <button id="toggleSidebar">☰</button>
+                </div>
+                <main>
+                    <div class="divInterna">
+                        <div id="listaFuncionarios">
+                            <div class="container">
+                                <button id="filtrarButton" onclick="toggleFiltros()">Filtrar
+                                    <img src="/imagens/filter.png" alt="Filtrar Icon"
+                                        style="width: 16px; height: 16px; vertical-align: middle; margin-left: 5px;">
+                                </button>
+
+
+                                <div class="filter-box hidden" id="filter-boxid">
+                                    <div class="filtro-item">
+                                        <label for="filtrofuncionario">Filtrar por funcionário:</label>
+                                        <input type="text" id="filtrofuncionario"
+                                            placeholder="Digite o nome do funcionário" />
+                                    </div>
+
+                                    <div class="filtro-item" id="filtroBoxData">
+                                        <label for="filtroData" id="labelFiltroData">Filtrar por data:</label>
+                                        <input type="date" id="filtroData" />
+                                    </div>
+                                </div>
+
+
+
+                                <div class="table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Funcionário</th>
+                                                <th>Data</th>
+                                                <th>Entrada</th>
+                                                <th>Saída</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Maria Oliveira</td>
+                                                <td>13/05/2025</td>
+                                                <td>07:00</td>
+                                                <td>15:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Carlos Souza</td>
+                                                <td>13/05/2025</td>
+                                                <td>08:00</td>
+                                                <td>16:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Paulo Lima</td>
+                                                <td>13/05/2025</td>
+                                                <td>09:00</td>
+                                                <td>17:00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="chart-toggle-buttons" style="justify-content: center;">
+                                    <button onclick="mostrarGraficoPonto('bar')">Horas Trabalhadas</button>
+                                    <button onclick="mostrarGraficoPonto('line')">Histórico Semanal</button>
+                                </div>
+
+                                <div class="chart-container">
+                                    <div id="graficoBarra" style="display: block;">
+                                        <canvas id="chartPontoBarra" class="chart-canvas"></canvas>
+                                    </div>
+                                    <div id="graficoLinhaPonto" style="display: none;">
+                                        <canvas id="chartPontoLinha" class="chart-canvas"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <div id="footer"></div>
+        </div>
+    </div>
+
+    <script>
+        let chartBarra = null;
+        let chartLinha = null;
+
+        function mostrarGraficoPonto(tipo) {
+            const divBarra = document.getElementById("graficoBarra");
+            const divLinha = document.getElementById("graficoLinhaPonto");
+
+            // Destroy existing charts before switching
+            if (tipo === 'bar' && chartLinha) {
+                chartLinha.destroy();
+                chartLinha = null;
+            } else if (tipo === 'line' && chartBarra) {
+                chartBarra.destroy();
+                chartBarra = null;
+            }
+
+            if (tipo === 'bar') {
+                divBarra.style.display = 'block';
+                divLinha.style.display = 'none';
+
+                if (!chartBarra) {
+                    const ctxBar = document.getElementById('chartPontoBarra').getContext('2d');
+                    chartBarra = new Chart(ctxBar, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Maria', 'Carlos', 'Paulo'],
+                            datasets: [{
+                                label: 'Horas Trabalhadas',
+                                data: [8, 8, 8],
+                                backgroundColor: ['#2980b9', '#27ae60', '#f39c12']
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false, // Changed to false for better resize behavior
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { stepSize: 1 }
+                                }
+                            }
+                        }
+                    });
+                }
+            } else if (tipo === 'line') {
+                divBarra.style.display = 'none';
+                divLinha.style.display = 'block';
+
+                if (!chartLinha) {
+                    const ctxLinha = document.getElementById('chartPontoLinha').getContext('2d');
+                    chartLinha = new Chart(ctxLinha, {
+                        type: 'line',
+                        data: {
+                            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
+                            datasets: [
+                                {
+                                    label: 'Maria',
+                                    data: [8, 8, 7, 8, 8],
+                                    borderColor: '#2980b9',
+                                    fill: false,
+                                    tension: 0.4
+                                },
+                                {
+                                    label: 'Carlos',
+                                    data: [8, 7, 8, 7, 8],
+                                    borderColor: '#27ae60',
+                                    fill: false,
+                                    tension: 0.4
+                                },
+                                {
+                                    label: 'Paulo',
+                                    data: [7, 8, 8, 7, 7],
+                                    borderColor: '#f39c12',
+                                    fill: false,
+                                    tension: 0.4
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false, // Changed to false for better resize behavior
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { stepSize: 1 }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+        // Enhanced resize handler with debounce
+        let resizeTimeout;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function () {
+                if (chartBarra) {
+                    chartBarra.resize();
+                }
+                if (chartLinha) {
+                    chartLinha.resize();
+                }
+            }, 200); // 200ms debounce time
+        });
+
+        // Initialize with bar chart
+        window.onload = () => {
+            mostrarGraficoPonto('bar');
+        };
+
+        // Rest of your existing functions...
+        function toggleFiltros() {
+            const filtros = document.querySelector('.filter-box');
+            const botao = document.querySelector('.botao-filtro-discreto');
+
+            if (filtros.style.display === "none" || filtros.classList.contains("hidden")) {
+                filtros.classList.remove("hidden");
+                filtros.style.display = "block";
+                botao.textContent = "Ocultar Filtros";
+            } else {
+                filtros.style.display = "none";
+                filtros.classList.add("hidden");
+                botao.textContent = "Mostrar Filtros";
+            }
+        }
+
+        function loadHTML(elementId, url) {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById(elementId).innerHTML = this.responseText;
+                }
+            };
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+    </script>
+    <script>
+        function loadHTML(elementId, url) {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById(elementId).innerHTML = this.responseText;
+                }
+            };
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+        loadHTML('nav', 'navigation.html');
+        loadHTML('header', 'headers/headerregistroponto.html');
+
+        loadHTML('footer', 'footer.html');
+    </script>
+    <script>
+        document.getElementById("toggleSidebar").addEventListener("click", function () {
+            const sidebarDiv = document.getElementById("nav"); // Sidebar parent div
+            const toggleButton = document.getElementById("toggleSidebar");
+
+            if (sidebarDiv.style.display === "none") {
+                sidebarDiv.style.display = "flex"; // Show sidebar
+                toggleButton.style.display = "none"; // Hide button
+                sidebarItems.forEach(item => {
+                    item.style.display = "flex";
+                });
+
+            } else {
+                sidebarDiv.style.display = "none"; // Hide sidebar
+                toggleButton.style.display = "block"; // Show button
+            }
+        });
+
+        // Ensure sidebar auto-collapses when screen gets small
+        window.addEventListener("resize", function () {
+            const sidebarDiv = document.getElementById("nav");
+            const toggleButton = document.getElementById("toggleSidebar");
+
+            if (window.innerWidth < 600) { // Adjust as needed
+                sidebarDiv.style.display = "none";
+                toggleButton.style.display = "block"; // Show button
+            } else {
+                sidebarDiv.style.display = "flex";
+                toggleButton.style.display = "none"; // Hide button
+            }
+        });
+
+        // Run once on page load to apply correct state
+        window.dispatchEvent(new Event("resize"));
+
+
+    </script>
+    <script>
+        function filtrar() {
+            var filterBox = document.querySelector('.filter-boxid');
+
+            if (filterBox.classList.contains('hidden')) {
+                // Reset styles to make it visible again
+                filterBox.style.display = 'block';
+                setTimeout(() => {
+
+                    filterBox.classList.remove('hidden');
+                    filterBox.style.opacity = '1';
+                    filterBox.style.visibility = 'visible';
+                }, 10); // Tiny delay ensures display is applied before transition starts
+            } else {
+                // Start fading out
+                filterBox.style.opacity = '0';
+
+                setTimeout(() => {
+                    filterBox.classList.add('hidden');
+                    filterBox.style.visibility = 'hidden';
+                    filterBox.style.display = 'none'; // Remove from layout
+                }, 150); // Matches transition duration
+            }
+        }
+    </script>
+</body>
+
+</html>

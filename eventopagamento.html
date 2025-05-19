@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão Hospitalar - Escala de Funcionários</title>
+    <link rel="stylesheet" href="CSS/stylesheet_Standard.css">
+    <link rel="stylesheet" href="CSS/StyleEventoPagamento.css">
+    <style>
+        .divInterna {
+            width: fit-content;
+        }
+
+        h2 {
+            justify-self: center;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <div id="nav">
+        </div>
+        <div id="rightside">
+            <div id="header"></div>
+            <div class="main-container">
+                <div id="divButton">
+                    <button id="toggleSidebar">☰</button>
+                </div>
+                <main>
+                    <div class="divInterna">
+                        <div class="transaction-card">
+                            <h2>Detalhes da Transação</h2>
+                            <dl>
+                                <div class="row">
+                                    <dt>Id de Transação</dt>
+                                    <dd>123456</dd>
+                                </div>
+                                <div class="row">
+                                    <dt>Data e Hora</dt>
+                                    <dd>15/05/2025 10:30</dd>
+                                </div>
+                                <div class="row">
+                                    <dt>Valor</dt>
+                                    <dd>R$ 450,00</dd>
+                                </div>
+                                <div class="row">
+                                    <dt>Status</dt>
+                                    <dd>Pago</dd>
+                                </div>
+                                <div class="row">
+                                    <dt>Recebedor</dt>
+                                    <dd>Maria da Silva</dd>
+                                </div>
+                                <div class="row">
+                                    <dt>Descrição</dt>
+                                    <dd>Pagamento de plantão</dd>
+                                </div>
+                                <div class="row">
+                                    <dt>Forma de Pagamento</dt>
+                                    <dd>PIX</dd>
+                                </div>
+                                <div class="row">
+                                    <dt>Rubrica</dt>
+                                    <dd>Plantão Noturno</dd>
+                                </div>
+                                <div class="row">
+                                    <dt>Horas Trabalhadas</dt>
+                                    <dd>12h</dd>
+                                </div>
+                                <div class="row">
+                                    <dt>Horas Extras</dt>
+                                    <dd>2h</dd>
+                                </div>
+                                <div class="row">
+                                    <dt>Afastamento</dt>
+                                    <dd>–</dd>
+                                </div>
+                                <div class="row">
+                                    <dt>Descontos</dt>
+                                    <dd>R$ 30,00</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <div id="footer"></div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all content sections
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('visible');
+            });
+
+            // Show selected section
+            document.getElementById(tabId).classList.add('visible');
+
+            // Highlight active tab
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active-tab');
+            });
+
+            event.target.classList.add('active-tab');
+        }
+    </script>
+    <script>
+        document.getElementById("toggleSidebar").addEventListener("click", function () {
+            const sidebarDiv = document.getElementById("nav"); // Sidebar parent div
+            const toggleButton = document.getElementById("toggleSidebar");
+
+            if (sidebarDiv.style.display === "none") {
+                sidebarDiv.style.display = "flex"; // Show sidebar
+                toggleButton.style.display = "none"; // Hide button
+                sidebarItems.forEach(item => {
+                    item.style.display = "flex";
+                });
+
+            } else {
+                sidebarDiv.style.display = "none"; // Hide sidebar
+                toggleButton.style.display = "block"; // Show button
+            }
+        });
+
+        // Ensure sidebar auto-collapses when screen gets small
+        window.addEventListener("resize", function () {
+            const sidebarDiv = document.getElementById("nav");
+            const toggleButton = document.getElementById("toggleSidebar");
+
+            if (window.innerWidth < 600) { // Adjust as needed
+                sidebarDiv.style.display = "none";
+                toggleButton.style.display = "block"; // Show button
+            } else {
+                sidebarDiv.style.display = "flex";
+                toggleButton.style.display = "none"; // Hide button
+            }
+        });
+
+        // Run once on page load to apply correct state
+        window.dispatchEvent(new Event("resize"));
+
+
+    </script>
+
+    <script>
+        function loadHTML(elementId, url) {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById(elementId).innerHTML = this.responseText;
+                }
+            };
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+        loadHTML('nav', 'navigation.html');
+        loadHTML('header', 'headers/headereventopagamento.html');
+
+        loadHTML('footer', 'footer.html');
+    </script>
+
+    <script>
+        function filtrar() {
+            var filterBox = document.querySelector('.filter-box');
+            if (filterBox.classList.contains('visible')) {
+                filterBox.classList.remove('visible');
+                setTimeout(function () {
+                    filterBox.style.display = 'none'; // Hide after transition
+                }, 250); // Timeout matches the transition duration
+            } else {
+                filterBox.style.display = 'block'; // Display right away
+                setTimeout(function () {
+                    filterBox.classList.add('visible');
+                }, 0); // Immediate change to visible state
+            }
+        }
+    </script>
+</body>
+
+</html>
