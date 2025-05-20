@@ -1,0 +1,61 @@
+.parent {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 15px;
+}
+
+.div1 {
+    grid-area: 1 / 1 / 5 / 5;
+}
+
+.div2 {
+    grid-area: 1 / 1 / 2 / 5;
+}
+
+.div3 {
+    grid-area: 2 / 1 / 5 / 5;
+}
+
+.div3 {
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    height: 60vh;
+}
+
+.div2 {
+    margin-top: 5%;
+}
+
+table,
+thead {
+    border: 2px solid black;
+    margin-bottom: 0px;
+}
+
+.div3 canvas {
+    padding-bottom: 2vh;
+    padding-top: 2vh;
+    height: 25vh;
+    min-height: 25vh;
+}
+
+.pesquisador {
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    background-color: aliceblue;
+    border-radius: 5px;
+}
+
+.pesquisador input {
+    margin-left: 10vh;
+}
+
+#graficoPacientes {
+    height: 60vh !important;
+    width: 60vh !important;
+    justify-self: center;
+}

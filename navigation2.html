@@ -19,9 +19,11 @@
             <li><button class="nav-button" data-page="registroponto.html" data-css="style_registroponto.css">Registro
                     Ponto</button></li>
             <li><button class="nav-button" data-page="gridbancodehoras2.html">Banco de Horas</button></li>
-            <li><button class="nav-button" data-page="escala.html">Escala</button></li>
-            <li><button class="nav-button" data-page="ocupacao.html">Ocupação</button></li>
-            <li><button class="nav-button" data-page="produtividade.html">Produtividade</button></li>
+            <li><button class="nav-button" data-page="gridescala.html">Escala</button></li>
+            <li><button class="nav-button" data-page="ocupacao.html" data-css="style_ocupacao.css">Ocupação</button>
+            </li>
+            <li><button class="nav-button" data-page="produtividade.html"
+                    data-css="produtividadecss.css">Produtividade</button></li>
         </ul>
     </nav>
 
@@ -45,6 +47,7 @@
     });
 
     document.getElementById("toggleSidebar").addEventListener("click", function () {
+
         const sidebarDiv = document.getElementById("nav");
         const toggleButton = document.getElementById("toggleSidebar");
 

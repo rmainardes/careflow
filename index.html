@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão Hospitalar - Escala de Funcionários</title>
     <link rel="stylesheet" href="CSS/stylesheet_Standard.css">
-    <script src="script.js"></script>
+    <script src="/js/scripts.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
@@ -69,7 +69,8 @@
                 return;
             }
 
-            // Clear current content while loading
+            // Clear current content while loading            
+
             document.getElementById('main-content').innerHTML = '<div class="loading">Loading...</div>';
 
             // Get the header element reference first
@@ -86,14 +87,34 @@
                 })
                 .then(html => {
                     document.getElementById('main-content').innerHTML = html;
+                    if (pageUrl.includes("produtividade.html")) {
+                        console.log("Running initializeChart() after loading produtividade.html");
+                        initializeChart(); // Call function only when produtividade.html loads
+                    }
+                    if (!pageUrl.includes("ocupacao.html")) {
+                        clearChartInstances(); // Only clear when leaving ocupacao.html
+                    }
 
-                    // Execute any scripts in the loaded content
-                    const scripts = document.getElementById('main-content').querySelectorAll('script');
-                    scripts.forEach(script => {
-                        const newScript = document.createElement('script');
-                        newScript.textContent = script.textContent;
-                        document.body.appendChild(newScript).remove();
-                    });
+                    if (pageUrl.includes("ocupacao.html")) {
+                        console.log("Running mostrarGrafico() after loading ocupacao.html");
+
+                        // Keep checking until graficoPizza is found, then execute
+                        const waitForChart = setInterval(() => {
+                            const divPizza = document.getElementById("graficoPizza");
+
+                            if (divPizza) {
+                                clearInterval(waitForChart);  // Stop checking once element is available
+                                mostrarGrafico('pizza');  // Now run the chart function
+                                console.log("Chart initialized successfully!");
+                            } else {
+                                console.warn("graficoPizza not found. Waiting...");
+                            }
+                        }, 300); // Check every 300ms until element appears
+                    }
+
+
+
+
                 })
                 .catch(error => {
                     console.error('Page load error:', error);

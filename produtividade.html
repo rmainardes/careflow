@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão Hospitalar - Escala de Funcionários</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <div class="parent">
+        <div class="div1">
+            <div class="pesquisador">
+                <label for="pesquisa">Pesquisa de Funcionário</label>
+                <input type="pesquisa" id="pesquisa" name="pesquisa" value="Insira um nome">
+            </div>
+        </div>
+        <div class="div2">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Profissional
+                        </th>
+                        <th>
+                            Pacientes
+                        </th>
+                        <th>
+                            Leitos
+                        </th>
+                        <th>
+                            Horas Trabalhadas
+                        </th>
+                        <th>
+                            Faltas
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            Maria Silva
+                        </td>
+                        <td>
+                            15
+                        </td>
+                        <td>
+                            2
+                        </td>
+                        <td>
+                            170
+                        </td>
+                        <td>
+                            1
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="div3">
+            <canvas id="graficoPacientes"></canvas>
+        </div>
+    </div>
+
+
+
+
+    <script>
+
+
+
+        console.log("Chart script loaded");
+
+        function initializeChart() {
+            setTimeout(() => {
+                const canvas = document.getElementById("graficoPacientes");
+                if (canvas) {
+                    const ctx = canvas.getContext('2d');
+                    new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['Atendidos', 'Não Atendidos', 'Em Espera'],
+                            datasets: [{
+                                label: 'Situação dos Pacientes',
+                                data: [60, 25, 15],
+                                backgroundColor: ['#4CAF50', '#F44336', '#808080'],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: true, position: 'right' },
+                                title: { display: true, text: 'Pacientes', align: 'center' }
+                            }
+                        }
+                    });
+                } else {
+                    console.warn("graficoPacientes not found. Waiting...");
+                }
+            }, 500);
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

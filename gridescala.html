@@ -129,220 +129,80 @@
 </head>
 
 <body>
-    <div class="layout">
-        <div id="nav">
-        </div>
-        <div id="rightside">
-            <div id="header"></div>
-            <div class="main-container">
-                <div id="divButton">
-                    <button id="toggleSidebar">☰</button>
-                </div>
-                <main>
-                    <div class="divInterna">
-                        <div id="listaFuncionarios">
-                            <div class="buttons">
-                                <button id="filtrarButton" onclick="filtrar()">
-                                    Filtrar
-                                    <img src="/imagens/filter.png" alt="Filtrar Icon"
-                                        style="width: 16px; height: 16px; vertical-align: middle; margin-left: 5px;">
-                                </button>
-                            </div>
 
-                            <div class="filter-box hidden">
-                                <div class="line" id="filtersTop">
-                                    <label for="employeeFilter">Filtrar por Funcionário:</label>
-                                    <input type="text" id="employeeFilter" name="employeeFilter"
-                                        placeholder="Digite o nome do funcionário">
-                                </div>
-                                <div class="line" id="linhaInferior">
-                                    <div id="blocoData">
-                                        <label for="dateFilter">Filtrar por Data:</label>
-                                        <input type="date" id="dateFilter" name="dateFilter"
-                                            placeholder="Escolha uma data">
-                                    </div>
-                                    <div id="blocoCargo">
-                                        <label for="cargoFilter">Filtrar por Cargo:</label>
-                                        <select id="cargoFilter" name="cargoFilter">
-                                            <option value="">Selecione o Cargo</option>
-                                            <option value="medico">Médico(a)</option>
-                                            <option value="enfermeiro">Enfermeiro(a)</option>
-                                            <option value="administrativo">Administrativo</option>
-                                            <option value="diretoria">Diretoria</option>
-                                            <option value="servico">Serviço</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Nome do Funcionário</th>
-                                        <th>Data</th>
-                                        <th>Horário de Início</th>
-                                        <th>Horário Término</th>
-                                        <th>Jornada</th>
-                                        <th>Cargo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Sample row, should be populated dynamically with real data -->
-                                    <tr>
-                                        <td>Maria Silva</td>
-                                        <td>2023-10-05</td>
-                                        <td>08:00</td>
-                                        <td>16:00</td>
-                                        <td>40h Semanais</td>
-                                        <td>Enfermeiro(a)</td>
-                                        <td><button id="deleteButton"><img id="deleteImg" src="/imagens/delete.png"
-                                                    alt="Filtrar Icon">
-                                            </button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>João Pereira</td>
-                                        <td>2023-10-06</td>
-                                        <td>07:00</td>
-                                        <td>19:00</td>
-                                        <td>12x36</td>
-                                        <td>Médico(a)</td>
-                                        <td><button id="deleteButton"><img id="deleteImg" src="/imagens/delete.png"
-                                                    alt="Filtrar Icon">
-                                            </button></td>
-                                    </tr>
-                                    <!-- More rows can be dynamically added here -->
-                                </tbody>
-                            </table>
-                        </div>
-                </main>
+    <div class="divInterna">
+        <div id="listaFuncionarios">
+            <div class="buttons">
+                <button id="filtrarButton" onclick="filtrar()">
+                    Filtrar
+                    <img src="/imagens/filter.png" alt="Filtrar Icon"
+                        style="width: 16px; height: 16px; vertical-align: middle; margin-left: 5px;">
+                </button>
             </div>
-            <div id="footer"></div>
+
+            <div class="filter-box hidden">
+                <div class="line" id="filtersTop">
+                    <label for="employeeFilter">Filtrar por Funcionário:</label>
+                    <input type="text" id="employeeFilter" name="employeeFilter"
+                        placeholder="Digite o nome do funcionário">
+                </div>
+                <div class="line" id="linhaInferior">
+                    <div id="blocoData">
+                        <label for="dateFilter">Filtrar por Data:</label>
+                        <input type="date" id="dateFilter" name="dateFilter" placeholder="Escolha uma data">
+                    </div>
+                    <div id="blocoCargo">
+                        <label for="cargoFilter">Filtrar por Cargo:</label>
+                        <select id="cargoFilter" name="cargoFilter">
+                            <option value="">Selecione o Cargo</option>
+                            <option value="medico">Médico(a)</option>
+                            <option value="enfermeiro">Enfermeiro(a)</option>
+                            <option value="administrativo">Administrativo</option>
+                            <option value="diretoria">Diretoria</option>
+                            <option value="servico">Serviço</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome do Funcionário</th>
+                        <th>Data</th>
+                        <th>Horário de Início</th>
+                        <th>Horário Término</th>
+                        <th>Jornada</th>
+                        <th>Cargo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sample row, should be populated dynamically with real data -->
+                    <tr>
+                        <td>Maria Silva</td>
+                        <td>2023-10-05</td>
+                        <td>08:00</td>
+                        <td>16:00</td>
+                        <td>40h Semanais</td>
+                        <td>Enfermeiro(a)</td>
+                        <td><button id="deleteButton"><img id="deleteImg" src="/imagens/delete.png" alt="Filtrar Icon">
+                            </button></td>
+                    </tr>
+                    <tr>
+                        <td>João Pereira</td>
+                        <td>2023-10-06</td>
+                        <td>07:00</td>
+                        <td>19:00</td>
+                        <td>12x36</td>
+                        <td>Médico(a)</td>
+                        <td><button id="deleteButton"><img id="deleteImg" src="/imagens/delete.png" alt="Filtrar Icon">
+                            </button></td>
+                    </tr>
+                    <!-- More rows can be dynamically added here -->
+                </tbody>
+            </table>
         </div>
-    </div>
-
-    <script>
-        function showTab(tabId) {
-            // Hide all content sections
-            document.querySelectorAll('.content').forEach(content => {
-                content.classList.remove('visible');
-            });
-
-            // Show selected section
-            document.getElementById(tabId).classList.add('visible');
-
-            // Highlight active tab
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active-tab');
-            });
-
-            event.target.classList.add('active-tab');
-        }
-    </script>
-    <script>
-        document.getElementById("toggleSidebar").addEventListener("click", function () {
-            const sidebarDiv = document.getElementById("nav"); // Sidebar parent div
-            const toggleButton = document.getElementById("toggleSidebar");
-
-            if (sidebarDiv.style.display === "none") {
-                sidebarDiv.style.display = "flex"; // Show sidebar
-                toggleButton.style.display = "none"; // Hide button
-                sidebarItems.forEach(item => {
-                    item.style.display = "flex";
-                });
-
-            } else {
-                sidebarDiv.style.display = "none"; // Hide sidebar
-                toggleButton.style.display = "block"; // Show button
-            }
-        });
-
-        document.getElementById("toggleSidebar").addEventListener("click", function () {
-            const sidebarDiv = document.getElementById("nav");
-            const toggleButton = document.getElementById("toggleSidebar");
-
-            sidebarDiv.style.display = "flex"; // Show sidebar
-            toggleButton.style.display = "none"; // Hide toggle button
-
-            const collapseBtn = document.getElementById("collapseSidebar");
-            if (collapseBtn) {
-                collapseBtn.style.display = "block"; // Show collapse button
-            }
-        });
-
-        // Ensure sidebar auto-collapses when screen gets small
-        window.addEventListener("resize", function () {
-            const sidebarDiv = document.getElementById("nav");
-            const toggleButton = document.getElementById("toggleSidebar");
-
-            if (window.innerWidth < 600) { // Adjust as needed
-                sidebarDiv.style.display = "none";
-                toggleButton.style.display = "block"; // Show button
-            } else {
-                sidebarDiv.style.display = "flex";
-                toggleButton.style.display = "none"; // Hide button
-            }
-        });
-
-        // Run once on page load to apply correct state
-        window.dispatchEvent(new Event("resize"));
 
 
-    </script>
-
-    <script>
-        function loadHTML(elementId, url, callback) {
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    document.getElementById(elementId).innerHTML = this.responseText;
-                    if (callback) callback();
-                }
-            };
-            xhr.open("GET", url, true);
-            xhr.send();
-        }
-
-        // Load sidebar and add collapse button logic after loading
-        loadHTML('nav', 'navigation.html', function () {
-            const collapseBtn = document.getElementById("collapseSidebar");
-            if (collapseBtn) {
-                collapseBtn.addEventListener("click", function () {
-                    document.getElementById("nav").style.display = "none";
-                    document.getElementById("toggleSidebar").style.display = "block";
-                    collapseBtn.style.display = "none"; // Hide collapse button again
-                });
-            }
-        });
-
-        loadHTML('header', 'headers/headercadastropaciente.html');
-        loadHTML('footer', 'footer.html');
-    </script>
-
-
-
-    <script>
-        function filtrar() {
-            var filterBox = document.querySelector('.filter-box');
-
-            if (filterBox.classList.contains('hidden')) {
-                // Reset styles to make it visible again
-                filterBox.style.display = 'block';
-                setTimeout(() => {
-                    filterBox.classList.remove('hidden');
-                    filterBox.style.opacity = '1';
-                    filterBox.style.visibility = 'visible';
-                }, 10); // Tiny delay ensures display is applied before transition starts
-            } else {
-                // Start fading out
-                filterBox.style.opacity = '0';
-
-                setTimeout(() => {
-                    filterBox.classList.add('hidden');
-                    filterBox.style.visibility = 'hidden';
-                    filterBox.style.display = 'none'; // Remove from layout
-                }, 150); // Matches transition duration
-            }
-        }
-    </script>
 </body>
 
 </html>

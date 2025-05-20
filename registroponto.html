@@ -10,7 +10,12 @@
         .divInterna {
             width: fit-content;
             min-width: 212px;
+            max-width: 1200px;
+            display: flex;
+            justify-content: center;
         }
+
+
 
         h2 {
             justify-self: center;
@@ -119,13 +124,6 @@
             /* Add some vertical padding */
         }
 
-        .divInterna {
-            width: fit-content;
-            max-width: 1200px;
-            /* Set a maximum width */
-            display: flex;
-            justify-content: center;
-        }
 
         #listaFuncionarios {
             width: 100%;
@@ -256,7 +254,7 @@
                     <div id="graficoBarra" style="display: block;">
                         <canvas id="chartPontoBarra" class="chart-canvas"></canvas>
                     </div>
-                    <div id="graficoLinhaPonto" style="display: none;">
+                    <div id="graficoLinha" style="display: none;">
                         <canvas id="chartPontoLinha" class="chart-canvas"></canvas>
                     </div>
                 </div>
@@ -270,7 +268,7 @@
 
         function mostrarGraficoPonto(tipo) {
             const divBarra = document.getElementById("graficoBarra");
-            const divLinha = document.getElementById("graficoLinhaPonto");
+            const divLinha = document.getElementById("graficoLinha");
 
             // Destroy existing charts before switching
             if (tipo === 'bar' && chartLinha) {
@@ -360,22 +358,106 @@
 
         // Enhanced resize handler with debounce
         let resizeTimeout;
+        // window.addEventListener('resize', function () {
+        //     clearTimeout(resizeTimeout);
+        //     resizeTimeout = setTimeout(function () {
+        //         if (chartBarra) {
+        //             chartBarra.resize();
+        //         }
+        //         if (chartLinha) {
+        //             chartLinha.resize();
+        //         }
+        //     }, 200); // 200ms debounce time
+        // });
+
         window.addEventListener('resize', function () {
             clearTimeout(resizeTimeout);
+
             resizeTimeout = setTimeout(function () {
+                const chartContainer = document.getElementById("chartContainer");
+
+                // If the container is missing, recreate it
+                if (!document.getElementById("chartBarra")) {
+                    chartContainer.innerHTML = ''; // Clear previous content
+                    const chartCanvas = document.createElement("canvas");
+                    chartCanvas.id = "chartBarra";
+                    chartContainer.appendChild(chartCanvas);
+                }
+
                 if (chartBarra) {
+                    if (window.myChart) {
+                        window.myChart.destroy(); // Destroy previous instance if exists
+                    }
+
+                    // Reinitialize the chart
+                    window.myChart = new Chart(chartBarra.getContext("2d"), {
+                        type: 'bar',
+                        data: chartData,
+                        options: chartOptions
+                    });
+
                     chartBarra.resize();
                 }
+
                 if (chartLinha) {
                     chartLinha.resize();
                 }
+
+                console.log("Chart resized and reloaded!");
             }, 200); // 200ms debounce time
         });
 
-        // Initialize with bar chart
-        window.onload = () => {
-            mostrarGraficoPonto('bar');
-        };
+
+        setTimeout(() => {
+            const divBarra = document.getElementById("graficoBarra");
+            const divLinha = document.getElementById("graficoLinha");
+
+
+            divLinha.style.display = 'none';
+            if (window.myChart) {
+                window.myChart.destroy();  // Clears the previous instance
+            }
+
+            if (divBarra) {
+                divBarra.style.display = 'block';  // Force it visible
+                mostrarGraficoPonto('bar');
+                console.log("solicitação feita!");
+            } else {
+                console.warn('graficoBarra not in DOM');
+            }
+        }, 50);
+
+        const waitForElement = setInterval(() => {
+            const chartContainer = document.getElementById("chartContainer");
+
+            if (chartContainer) {
+                clearInterval(waitForElement);
+                setupChart();  // Run the setup function once the element appears
+            }
+        }, 200);
+
+
+        function setupChart() {
+            const container = document.getElementById("chartContainer");
+
+            if (!container) {
+                console.error("chartContainer not found in DOM. Cannot initialize chart.");
+                return;
+            }
+
+            // Clear previous chart only when necessary
+            container.innerHTML = '';
+
+            const chartCanvas = document.createElement("canvas");
+            chartCanvas.id = "chartBarra";
+            container.appendChild(chartCanvas);
+
+        }
+
+        observer.observe(document.body, { childList: true, subtree: true });
+
+
+        observer.observe(document.body, { childList: true, subtree: true });
 
         // Rest of your existing functions...
         function toggleFiltros() {
@@ -393,6 +475,19 @@
             }
         }
 
+        window.addEventListener("popstate", () => {
+            console.log("Page changed, resetting charts...");
+            if (chartBarra) {
+                chartBarra.destroy();
+                chartBarra = null;
+            }
+            if (chartLinha) {
+                chartLinha.destroy();
+                chartLinha = null;
+            }
+
+            setupChart(); // Recreate after reset
+        });
 
     </script>
     <script>

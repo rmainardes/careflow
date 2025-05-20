@@ -474,14 +474,7 @@ header img {
 /* Responsive adjustment with smooth transition */
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
 
-
-    nav a {
-        font-size: 0.85em;
-        padding: 8px 10px;
-    }
-}
 
 @media (max-width: 600px) {
     nav {
@@ -645,23 +638,7 @@ main {
 
 }
 
-@media (max-width: 780px) {
-    #nav {
-        overflow-x: hidden;
-        width: 4%;
-        /* Shrink further */
-        min-width: 130px;
-        /* Keep it readable */
-    }
 
-    .sidebar {
-        width: 130px;
-    }
-
-    main {
-        font-size: x-small;
-    }
-}
 
 
 @media (max-height:600px) {
@@ -772,16 +749,7 @@ form textarea {
     }
 }
 
-@media (max-width: 780px) {
-    #nav {
-        width: 5%;
-        min-width: 160px;
-    }
 
-    .sidebar {
-        width: 160px;
-    }
-}
 
 
 
