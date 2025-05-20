@@ -2,22 +2,16 @@
     padding: 10px;
 }
 
-.div2 {
-    grid-area: 1 / 1 / 2 / 5;
-}
 
 .div3 {
-    grid-area: 2 / 1 / 5 / 5;
+    width: 70%;
+    /* Make parent element full-width */
+    max-width: 600px;
+    justify-self: center;
+    /* Max width for container, adjust as needed */
 }
 
-.div3 {
-    border: 2px solid black;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    margin-top: 5%;
-    height: 45vh;
 
-}
 
 .div2 {
     margin-top: 5%;
@@ -30,10 +24,20 @@ thead {
 }
 
 .div3 canvas {
-    padding-bottom: 2vh;
-    padding-top: 2vh;
     aspect-ratio: 1 / 1;
-    height
+    /* Maintain aspect ratio */
+    width: 100%;
+    /* Width defined, height determined by aspect ratio */
+    height: auto;
+    /* Let height adjust based on width */
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 2vh;
+    /* Add padding vertically */
+    margin-bottom: 15px;
+    margin-top: 5%;
+    box-sizing: border-box;
+    /* Ensure padding/border do not affect box sizing */
 }
 
 .pesquisador {
@@ -49,8 +53,11 @@ thead {
 }
 
 #graficoPacientes {
-    aspect-ratio: 1 / 1;
-    width: 40vw !important;
-    height: 25vw !important;
     justify-self: center;
+
+    /* Fixed width */
+    height: auto !important;
+    /* Make height auto to respect aspect-ratio */
+    aspect-ratio: 1 / 1 !important;
+    /* Aspect ratio of 1:1 */
 }
