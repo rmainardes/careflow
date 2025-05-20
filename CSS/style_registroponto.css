@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 
 
 
@@ -74,14 +74,7 @@ tbody tr:hover {
 }
 
 
-.chart-container {
-  margin: 20px auto;
 
-  background-color: #fdfdfd;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  max-width: 700px;
-}
 
 .chart-container h3 {
   margin-bottom: 10px;
@@ -94,7 +87,7 @@ canvas {
   display: block;
   margin: 0 auto;
   max-width: 60%;
-  height: auto;
+  
 }
 
 #filter-boxid {
@@ -176,10 +169,7 @@ canvas {
     padding-top: 50px;
   }
 
-  .chart-container {
-    max-width: 65%;
-
-  }
+  
 
   canvas {
     max-width: 100%;
@@ -403,18 +393,14 @@ canvas {
   height: 100%;
 }
 
-#chartPontoBarra,
-#chartPontoLinha {
-  width: 100% !important;
-  height: 100% !important;
-}
+
 
 /* Chart container styles */
 .chart-container {
   position: relative;
-  width: 100%;
+  width: 300px;
   max-width: 100%;
-  height: 10vh;
+  height: 300px;
   /* Fixed height instead of min-height */
   margin: 20px 0;
 }

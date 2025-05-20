@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão Hospitalar - Escala de Funcionários</title>
     <link rel="stylesheet" href="CSS/stylesheet_Standard.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="/js/scripts.js" defer></script>
 
 
 </head>
@@ -60,41 +61,55 @@
 
         // Enhanced loadPage function
         function loadPage(pageUrl, cssFile) {
-            console.log('Loading:', pageUrl, 'with CSS:', cssFile);
+    console.log('Loading:', pageUrl, 'with CSS:', cssFile);
 
-            if (!pageUrl) {
-                console.error('No page specified');
-                return;
+    if (!pageUrl) {
+        console.error('No page specified');
+        return;
+    }
+
+    // Extract header file name based on the page URL (assuming same name convention)
+    const headerUrl = `headers/${pageUrl}`; // Adjust the path as needed
+
+    // Load main page content
+    fetch(pageUrl)
+        .then(response => {
+            if (!response.ok) throw new Error(`Page load failed (${response.status})`);
+            return response.text();
+        })
+        .then(html => {
+            document.getElementById('main-content').innerHTML = html;
+
+            // Load CSS if specified
+            if (cssFile) {
+                if (currentCssLink) currentCssLink.remove();
+
+                currentCssLink = document.createElement('link');
+                currentCssLink.rel = 'stylesheet';
+                currentCssLink.href = `CSS/${cssFile}?v=2`;
+                document.head.appendChild(currentCssLink);
             }
 
-            // Load page content
-            fetch(`${pageUrl}`)
-                .then(response => {
-                    if (!response.ok) throw new Error(`Page load failed (${response.status})`);
-                    return response.text();
-                })
-                .then(html => {
-                    document.getElementById('main-content').innerHTML = html;
+            // Load corresponding header file
+            return fetch(headerUrl);
+        })
+        .then(response => {
+            if (!response.ok) throw new Error(`Header load failed (${response.status})`);
+            return response.text();
+        })
+        .then(headerHtml => {
+            document.getElementById('header').innerHTML = headerHtml;
+        })
+        .catch(error => {
+            console.error('Page or Header load error:', error);
+            document.getElementById('main-content').innerHTML = `
+                <div class="error">
+                    Failed to load page: ${pageUrl}
+                    <br><small>${error.message}</small>
+                </div>`;
+        });
+}
 
-                    // Load CSS if specified
-                    if (cssFile) {
-                        if (currentCssLink) currentCssLink.remove();
-
-                        currentCssLink = document.createElement('link');
-                        currentCssLink.rel = 'stylesheet';
-                        currentCssLink.href = `CSS/${cssFile}`;
-                        document.head.appendChild(currentCssLink);
-                    }
-                })
-                .catch(error => {
-                    console.error('Page load error:', error);
-                    document.getElementById('main-content').innerHTML = `
-                            <div class="error">
-                                Failed to load page: ${pageUrl}
-                                <br><small>${error.message}</small>
-                            </div>`;
-                });
-        }
 
 
 
@@ -180,15 +195,14 @@
 
             // Load other components
             loadHTML('header', 'headers/headercadastropaciente.html');
-            loadHTML('main-content', 'ajustepontocontent.html');
+            // loadHTML('main-content', 'ajustepontocontent.html');
             loadHTML('footer', 'footer.html');
         });
     </script>
 
     <script>
         function filtrar() {
-            var filterBox = document.querySelector('.filter-box');
-
+            var filterBox = document.querySelector('.filter-box');            ;
             if (filterBox.classList.contains('hidden')) {
                 filterBox.style.display = 'block';
                 setTimeout(() => {
@@ -210,42 +224,15 @@
 
 
     </script>
-    <script>
-        // In your index.html's main script
+   
 
 
-        function initDynamicContent() {
-            // Initialize charts if elements exist
-            if (document.getElementById('chartPontoBarra')) {
-                mostrarGraficoPonto('bar');
-            }
 
-            // Reattach event listeners
-            document.querySelectorAll('.chart-toggle-buttons button').forEach(btn => {
-                btn.onclick = function () {
-                    mostrarGraficoPonto(this.textContent.includes('Horas') ? 'bar' : 'line');
-                };
-            });
 
-            document.getElementById('filtrarButton').onclick = toggleFiltros;
-        }
 
-        // Make these functions globally available
-        window.mostrarGraficoPonto = function (tipo) {
-            // Your existing chart function...
-        };
 
-        window.toggleFiltros = function () {
-            const filtros = document.querySelector('.filter-box');
-            if (filtros.classList.contains("hidden")) {
-                filtros.classList.remove("hidden");
-                document.getElementById('filtrarButton').textContent = "Ocultar Filtros";
-            } else {
-                filtros.classList.add("hidden");
-                document.getElementById('filtrarButton').textContent = "Filtrar";
-            }
-        };
-    </script>
+
+
 </body>
 
 </html>
