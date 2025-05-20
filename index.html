@@ -129,18 +129,16 @@
             }
 
             // Load CSS if specified
+
             if (cssFile) {
                 if (currentCssLink) currentCssLink.remove();
-                // Load CSS if specified
-                if (cssFile) {
-                    if (currentCssLink) currentCssLink.remove();
 
-                    currentCssLink = document.createElement('link');
-                    currentCssLink.rel = 'stylesheet';
-                    currentCssLink.href = `CSS/${cssFile}`;
-                    document.head.appendChild(currentCssLink);
-                }
+                currentCssLink = document.createElement('link');
+                currentCssLink.rel = 'stylesheet';
+                currentCssLink.href = `CSS/${cssFile}`;
+                document.head.appendChild(currentCssLink);
             }
+        }
 
 
 
@@ -156,100 +154,100 @@
 
 
 
-            // Initialize sidebar functionality
-            function initSidebar() {
-                const toggleButton = document.getElementById("toggleSidebar");
-                const sidebarDiv = document.getElementById("nav");
-                const collapseBtn = document.getElementById("collapseSidebar");
+        // Initialize sidebar functionality
+        function initSidebar() {
+            const toggleButton = document.getElementById("toggleSidebar");
+            const sidebarDiv = document.getElementById("nav");
+            const collapseBtn = document.getElementById("collapseSidebar");
 
-                if (toggleButton) {
-                    toggleButton.addEventListener("click", function () {
-                        sidebarDiv.style.display = "flex";
-                        toggleButton.style.display = "none";
-                        if (collapseBtn) collapseBtn.style.display = "block";
-                    });
-                }
-
-                if (collapseBtn) {
-                    collapseBtn.addEventListener("click", function () {
-                        sidebarDiv.style.display = "none";
-                        if (toggleButton) toggleButton.style.display = "block";
-                        collapseBtn.style.display = "none";
-                    });
-                }
-
-                window.addEventListener("resize", function () {
-                    if (window.innerWidth < 600) {
-                        sidebarDiv.style.display = "none";
-                        if (toggleButton) toggleButton.style.display = "block";
-                        if (collapseBtn) collapseBtn.style.display = "none";
-                    } else {
-                        sidebarDiv.style.display = "flex";
-                        if (toggleButton) toggleButton.style.display = "none";
-                        if (collapseBtn) collapseBtn.style.display = "none";
-                    }
-                });
-
-                window.dispatchEvent(new Event("resize"));
-            }
-
-            // Initialize navigation using event delegation
-            function initNavigation() {
-                document.addEventListener('click', function (event) {
-                    // Check if clicked element or its parent is a nav-button
-                    const button = event.target.closest('.nav-button');
-                    if (button) {
-                        event.preventDefault();
-                        const page = button.getAttribute('data-page');
-                        const css = button.getAttribute('data-css');
-
-                        // Update active state
-                        document.querySelectorAll('.nav-button').forEach(btn => {
-                            btn.classList.remove('active');
-                        });
-                        button.classList.add('active');
-
-                        // Load the page
-                        loadPage(page, css);
-                    }
+            if (toggleButton) {
+                toggleButton.addEventListener("click", function () {
+                    sidebarDiv.style.display = "flex";
+                    toggleButton.style.display = "none";
+                    if (collapseBtn) collapseBtn.style.display = "block";
                 });
             }
 
-            // Main initialization
-            document.addEventListener("DOMContentLoaded", function () {
-                // Load navigation first
-                loadHTML('nav', 'navigation2.html')
-                    .then(() => {
-                        initSidebar();
-                        initNavigation();
-                    })
-                    .catch(error => console.error('Navigation failed:', error));       // Load other components
-                loadHTML('header', 'headers/headerajusteponto.html');
-                loadHTML('main-content', 'ajustepontocontent.html');
-                loadHTML('footer', 'footer.html');
+            if (collapseBtn) {
+                collapseBtn.addEventListener("click", function () {
+                    sidebarDiv.style.display = "none";
+                    if (toggleButton) toggleButton.style.display = "block";
+                    collapseBtn.style.display = "none";
+                });
+            }
+
+            window.addEventListener("resize", function () {
+                if (window.innerWidth < 600) {
+                    sidebarDiv.style.display = "none";
+                    if (toggleButton) toggleButton.style.display = "block";
+                    if (collapseBtn) collapseBtn.style.display = "none";
+                } else {
+                    sidebarDiv.style.display = "flex";
+                    if (toggleButton) toggleButton.style.display = "none";
+                    if (collapseBtn) collapseBtn.style.display = "none";
+                }
             });
+
+            window.dispatchEvent(new Event("resize"));
+        }
+
+        // Initialize navigation using event delegation
+        function initNavigation() {
+            document.addEventListener('click', function (event) {
+                // Check if clicked element or its parent is a nav-button
+                const button = event.target.closest('.nav-button');
+                if (button) {
+                    event.preventDefault();
+                    const page = button.getAttribute('data-page');
+                    const css = button.getAttribute('data-css');
+
+                    // Update active state
+                    document.querySelectorAll('.nav-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    button.classList.add('active');
+
+                    // Load the page
+                    loadPage(page, css);
+                }
+            });
+        }
+
+        // Main initialization
+        document.addEventListener("DOMContentLoaded", function () {
+            // Load navigation first
+            loadHTML('nav', 'navigation2.html')
+                .then(() => {
+                    initSidebar();
+                    initNavigation();
+                })
+                .catch(error => console.error('Navigation failed:', error));       // Load other components
+            loadHTML('header', 'headers/headerajusteponto.html');
+            loadHTML('main-content', 'ajustepontocontent.html');
+            loadHTML('footer', 'footer.html');
+        });
     </script>
 
     <script>
-            function filtrar() {
-                var filterBox = document.querySelector('.filter-box');;
-                if (filterBox.classList.contains('hidden')) {
-                    filterBox.style.display = 'block';
-                    setTimeout(() => {
-                        filterBox.classList.remove('hidden');
-                        filterBox.style.opacity = '1';
-                        filterBox.style.visibility = 'visible';
-                    }, 10);
-                } else {
-                    filterBox.style.opacity = '0';
+        function filtrar() {
+            var filterBox = document.querySelector('.filter-box');;
+            if (filterBox.classList.contains('hidden')) {
+                filterBox.style.display = 'block';
+                setTimeout(() => {
+                    filterBox.classList.remove('hidden');
+                    filterBox.style.opacity = '1';
+                    filterBox.style.visibility = 'visible';
+                }, 10);
+            } else {
+                filterBox.style.opacity = '0';
 
-                    setTimeout(() => {
-                        filterBox.classList.add('hidden');
-                        filterBox.style.visibility = 'hidden';
-                        filterBox.style.display = 'none';
-                    }, 150);
-                }
+                setTimeout(() => {
+                    filterBox.classList.add('hidden');
+                    filterBox.style.visibility = 'hidden';
+                    filterBox.style.display = 'none';
+                }, 150);
             }
+        }
     </script>
 
 
