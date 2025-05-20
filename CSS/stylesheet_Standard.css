@@ -4,14 +4,12 @@
 button {
     font: bold 16px 'Montserrat', sans-serif;
     margin: 10px;
-    padding: 0 20px 10px 20px;
     line-height: 1.1rem;
     white-space: nowrap;
     align-content: center;
     all: unset;
     display: inline-block;
     padding: 10px;
-
     vertical-align: middle;
     box-sizing: border-box;
     min-width: 80px;
@@ -29,7 +27,7 @@ button {
 }
 
 @media (max-width: 700px) {
-    button {
+    main button {
         display: flex;
         height: 25px;
         align-items: center;
@@ -358,7 +356,6 @@ table th {
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-between;
-    margin-bottom: 1em;
     gap: 20px;
     margin: 0;
 }
@@ -507,6 +504,8 @@ header img {
     width: 100%;
 }
 
+
+
 .main-container {
     position: relative;
     display: flex;
@@ -567,7 +566,7 @@ main {
     justify-self: center;
     list-style: none;
     margin: 0;
-    margin-bottom: 14vh;
+    margin-bottom: 8vh;
     margin-top: 3vh;
 }
 
@@ -617,11 +616,14 @@ main {
 @media (max-width: 900px) {
     #nav {
         overflow-x: hidden;
+        overflow-y: hidden;
         width: 5%;
         /* Reduce width */
         min-width: 190px;
+
         /* Adjust minimum width */
     }
+
 
     main {
         font-size: small;
@@ -787,11 +789,7 @@ form textarea {
     }
 }
 
-@media (max-height: 700px) {
-    .sidebar li {
-        margin-bottom: 20px;
-    }
-}
+
 
 @media (max-height: 600px) {
     .sidebar li {

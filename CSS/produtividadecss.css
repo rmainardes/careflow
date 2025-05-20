@@ -1,13 +1,5 @@
 .parent {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    grid-column-gap: 20px;
-    grid-row-gap: 15px;
-}
-
-.div1 {
-    grid-area: 1 / 1 / 5 / 5;
+    padding: 10px;
 }
 
 .div2 {
@@ -21,8 +13,10 @@
 .div3 {
     border: 2px solid black;
     border-radius: 10px;
-    margin-bottom: 5%;
-    height: 60vh;
+    margin-bottom: 15px;
+    margin-top: 5%;
+    height: 45vh;
+
 }
 
 .div2 {
@@ -38,24 +32,25 @@ thead {
 .div3 canvas {
     padding-bottom: 2vh;
     padding-top: 2vh;
-    height: 25vh;
-    min-height: 25vh;
+    aspect-ratio: 1 / 1;
+    height
 }
 
 .pesquisador {
     margin-top: 2vh;
     display: flex;
     justify-content: center;
-    background-color: aliceblue;
+
     border-radius: 5px;
 }
 
 .pesquisador input {
-    margin-left: 10vh;
+    margin-left: 8px;
 }
 
 #graficoPacientes {
-    height: 60vh !important;
-    width: 60vh !important;
+    aspect-ratio: 1 / 1;
+    width: 40vw !important;
+    height: 25vw !important;
     justify-self: center;
 }
