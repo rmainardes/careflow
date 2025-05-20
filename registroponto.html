@@ -186,7 +186,6 @@
             }
         }
     </style>
-    <script src="/js/scripts.js"></script>
 </head>
 
 <body>
@@ -206,17 +205,7 @@
                         <label for="filtrofuncionario" id="Label1">Filtrar por funcionário:</label>
                         <input type="text" id="filtrofuncionario" placeholder="Digite o nome do funcionário" />
                     </div>
-                    <div class="filter-box hidden" id="filter-boxid">
-                        <div class="filtro-item">
-                            <label for="filtrofuncionario" id="Label1">Filtrar por funcionário:</label>
-                            <input type="text" id="filtrofuncionario" placeholder="Digite o nome do funcionário" />
-                        </div>
 
-                        <div class="filtro-item" id="filtroBoxData">
-                            <label for="filtroData" id="labelFiltroData">Filtrar por data:</label>
-                            <input type="date" id="filtroData" />
-                        </div>
-                    </div>
                     <div class="filtro-item" id="filtroBoxData">
                         <label for="filtroData" id="labelFiltroData">Filtrar por data:</label>
                         <input type="date" id="filtroData" />
@@ -257,43 +246,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Funcionário</th>
-                                <th>Data</th>
-                                <th>Entrada</th>
-                                <th>Saída</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Maria Oliveira</td>
-                                <td>13/05/2025</td>
-                                <td>07:00</td>
-                                <td>15:00</td>
-                            </tr>
-                            <tr>
-                                <td>Carlos Souza</td>
-                                <td>13/05/2025</td>
-                                <td>08:00</td>
-                                <td>16:00</td>
-                            </tr>
-                            <tr>
-                                <td>Paulo Lima</td>
-                                <td>13/05/2025</td>
-                                <td>09:00</td>
-                                <td>17:00</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
 
-                <div class="chart-toggle-buttons" style="justify-content: center;">
-                    <button onclick="mostrarGraficoPonto('bar')">Horas Trabalhadas</button>
-                    <button onclick="mostrarGraficoPonto('line')">Histórico Semanal</button>
-                </div>
                 <div class="chart-toggle-buttons" style="justify-content: center;">
                     <button onclick="mostrarGraficoPonto('bar')">Horas Trabalhadas</button>
                     <button onclick="mostrarGraficoPonto('line')">Histórico Semanal</button>
@@ -308,125 +261,116 @@
                     </div>
                 </div>
             </div>
-            <div class="chart-container">
-                <div id="graficoBarra" style="display: block;">
-                    <canvas id="chartPontoBarra" class="chart-canvas"></canvas>
-                </div>
-                <div id="graficoLinhaPonto" style="display: none;">
-                    <canvas id="chartPontoLinha" class="chart-canvas"></canvas>
-                </div>
-            </div>
         </div>
-    </div>
     </div>
 
     <script>
         let chartBarra = null;
         let chartLinha = null;
 
-        //     function mostrarGraficoPonto(tipo) {
-        //         const divBarra = document.getElementById("graficoBarra");
-        //         const divLinha = document.getElementById("graficoLinhaPonto");
+        function mostrarGraficoPonto(tipo) {
+            const divBarra = document.getElementById("graficoBarra");
+            const divLinha = document.getElementById("graficoLinhaPonto");
 
-        //         // Destroy existing charts before switching
-        //         if (tipo === 'bar' && chartLinha) {
-        //             chartLinha.destroy();
-        //             chartLinha = null;
-        //         } else if (tipo === 'line' && chartBarra) {
-        //             chartBarra.destroy();
-        //             chartBarra = null;
-        //         }
+            // Destroy existing charts before switching
+            if (tipo === 'bar' && chartLinha) {
+                chartLinha.destroy();
+                chartLinha = null;
+            } else if (tipo === 'line' && chartBarra) {
+                chartBarra.destroy();
+                chartBarra = null;
+            }
 
-        //         if (tipo === 'bar') {
-        //             divBarra.style.display = 'block';
-        //             divLinha.style.display = 'none';
+            if (tipo === 'bar') {
+                divBarra.style.display = 'block';
+                divLinha.style.display = 'none';
 
-        //             if (!chartBarra) {
-        //                 const ctxBar = document.getElementById('chartPontoBarra').getContext('2d');
-        //                 chartBarra = new Chart(ctxBar, {
-        //                     type: 'bar',
-        //                     data: {
-        //                         labels: ['Maria', 'Carlos', 'Paulo'],
-        //                         datasets: [{
-        //                             label: 'Horas Trabalhadas',
-        //                             data: [8, 8, 8],
-        //                             backgroundColor: ['#2980b9', '#27ae60', '#f39c12']
-        //                         }]
-        //                     },
-        //                     options: {
-        //                         responsive: true,
-        //                         maintainAspectRatio: false, // Changed to false for better resize behavior
-        //                         scales: {
-        //                             y: {
-        //                                 beginAtZero: true,
-        //                                 ticks: { stepSize: 1 }
-        //                             }
-        //                         }
-        //                     }
-        //                 });
-        //             }
-        //         } else if (tipo === 'line') {
-        //             divBarra.style.display = 'none';
-        //             divLinha.style.display = 'block';
+                if (!chartBarra) {
+                    const ctxBar = document.getElementById('chartPontoBarra').getContext('2d');
+                    chartBarra = new Chart(ctxBar, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Maria', 'Carlos', 'Paulo'],
+                            datasets: [{
+                                label: 'Horas Trabalhadas',
+                                data: [8, 8, 8],
+                                backgroundColor: ['#2980b9', '#27ae60', '#f39c12']
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false, // Changed to false for better resize behavior
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { stepSize: 1 }
+                                }
+                            }
+                        }
+                    });
+                }
+            } else if (tipo === 'line') {
+                divBarra.style.display = 'none';
+                divLinha.style.display = 'block';
 
-        //             if (!chartLinha) {
-        //                 const ctxLinha = document.getElementById('chartPontoLinha').getContext('2d');
-        //                 chartLinha = new Chart(ctxLinha, {
-        //                     type: 'line',
-        //                     data: {
-        //                         labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
-        //                         datasets: [
-        //                             {
-        //                                 label: 'Maria',
-        //                                 data: [8, 8, 7, 8, 8],
-        //                                 borderColor: '#2980b9',
-        //                                 fill: false,
-        //                                 tension: 0.4
-        //                             },
-        //                             {
-        //                                 label: 'Carlos',
-        //                                 data: [8, 7, 8, 7, 8],
-        //                                 borderColor: '#27ae60',
-        //                                 fill: false,
-        //                                 tension: 0.4
-        //                             },
-        //                             {
-        //                                 label: 'Paulo',
-        //                                 data: [7, 8, 8, 7, 7],
-        //                                 borderColor: '#f39c12',
-        //                                 fill: false,
-        //                                 tension: 0.4
-        //                             }
-        //                         ]
-        //                     },
-        //                     options: {
-        //                         responsive: true,
-        //                         maintainAspectRatio: false, // Changed to false for better resize behavior
-        //                         scales: {
-        //                             y: {
-        //                                 beginAtZero: true,
-        //                                 ticks: { stepSize: 1 }
-        //                             }
-        //                         }
-        //                     }
-        //                 });
-        //             }
-        //         }
-        //     }
+                if (!chartLinha) {
+                    const ctxLinha = document.getElementById('chartPontoLinha').getContext('2d');
+                    chartLinha = new Chart(ctxLinha, {
+                        type: 'line',
+                        data: {
+                            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
+                            datasets: [
+                                {
+                                    label: 'Maria',
+                                    data: [8, 8, 7, 8, 8],
+                                    borderColor: '#2980b9',
+                                    fill: false,
+                                    tension: 0.4
+                                },
+                                {
+                                    label: 'Carlos',
+                                    data: [8, 7, 8, 7, 8],
+                                    borderColor: '#27ae60',
+                                    fill: false,
+                                    tension: 0.4
+                                },
+                                {
+                                    label: 'Paulo',
+                                    data: [7, 8, 8, 7, 7],
+                                    borderColor: '#f39c12',
+                                    fill: false,
+                                    tension: 0.4
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false, // Changed to false for better resize behavior
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { stepSize: 1 }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        }
 
-        //     // Enhanced resize handler with debounce
-        //     let resizeTimeout;
-        //     window.addEventListener('resize', function () {
-        //         clearTimeout(resizeTimeout);
-        //         resizeTimeout = setTimeout(function () {
-        //             if (chartBarra) {
-        //                 chartBarra.resize();
-        //             }
-        //             if (chartLinha) {
-        //                 chartLinha.resize();
-        //             }
-        //         }, 200); // 200ms debounce time
-        //     });
+        // Enhanced resize handler with debounce
+        let resizeTimeout;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function () {
+                if (chartBarra) {
+                    chartBarra.resize();
+                }
+                if (chartLinha) {
+                    chartLinha.resize();
+                }
+            }, 200); // 200ms debounce time
+        });
 
         // Initialize with bar chart
         window.onload = () => {
