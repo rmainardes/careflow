@@ -75,6 +75,10 @@ function clearChartInstances() {
         chartPizza.destroy();
         chartPizza = null;
     }
+    if (chartBarra) {
+        chartBarra.destroy();
+        chartBarra = null;
+    }
     if (chartLinha) {
         chartLinha.destroy();
         chartLinha = null;
@@ -88,9 +92,7 @@ window.addEventListener('resize', function () {
     if (chartLinha) chartLinha.resize();
 });
 
-window.onload = () => {
-    mostrarGrafico('pizza');
-};
+
 
 
 setTimeout(() => {

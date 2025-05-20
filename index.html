@@ -94,6 +94,29 @@
                     if (!pageUrl.includes("ocupacao.html")) {
                         clearChartInstances(); // Only clear when leaving ocupacao.html
                     }
+                    if (!pageUrl.includes("registroponto.html")) {
+                        clearChartInstances();
+                        console.log("instances cleared");// Only clear when leaving ocupacao.html
+                    }
+                    if (pageUrl.includes("registroponto.html")) {
+                        console.log("Running mostrarGrafico() after loading ocupacao.html");
+
+                        // Keep checking until graficoPizza is found, then execute
+                        const waitForChart = setInterval(() => {
+                            const divBarra = document.getElementById("graficoBarra");
+
+                            if (divBarra) {
+                                clearInterval(waitForChart);  // Stop checking once element is available
+                                mostrarGraficoPonto('bar');  // Now run the chart function
+                                console.log("Chart initialized successfully!");
+                            } else {
+                                console.warn("graficoPizza not found. Waiting...");
+                            }
+                        }, 300); // Check every 300ms until element appears
+                    }
+
+
+                    // Keep checking until graficoPizza is found, then execute
 
                     if (pageUrl.includes("ocupacao.html")) {
                         console.log("Running mostrarGrafico() after loading ocupacao.html");
