@@ -189,93 +189,78 @@
 </head>
 
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <div class="layout">
-        <div id="nav">
-        </div>
-        <div id="rightside">
-            <div id="header"></div>
-            <div class="main-container">
-                <div id="divButton">
-                    <button id="toggleSidebar">☰</button>
-                </div>
-                <main>
-                    <div class="divInterna">
-                        <div id="listaFuncionarios">
-                            <div class="container">
-                                <button id="filtrarButton" onclick="toggleFiltros()">Filtrar
-                                    <img src="/imagens/filter.png" alt="Filtrar Icon"
-                                        style="width: 16px; height: 16px; vertical-align: middle; margin-left: 5px;">
-                                </button>
 
 
-                                <div class="filter-box hidden" id="filter-boxid">
-                                    <div class="filtro-item">
-                                        <label for="filtrofuncionario" id="Label1">Filtrar por funcionário:</label>
-                                        <input type="text" id="filtrofuncionario"
-                                            placeholder="Digite o nome do funcionário" />
-                                    </div>
-
-                                    <div class="filtro-item" id="filtroBoxData">
-                                        <label for="filtroData" id="labelFiltroData">Filtrar por data:</label>
-                                        <input type="date" id="filtroData" />
-                                    </div>
-                                </div>
+    <div class="divInterna">
+        <div id="listaFuncionarios">
+            <div class="container">
+                <button id="filtrarButton" onclick="toggleFiltros()">Filtrar
+                    <img src="/imagens/filter.png" alt="Filtrar Icon"
+                        style="width: 16px; height: 16px; vertical-align: middle; margin-left: 5px;">
+                </button>
 
 
-
-                                <div class="table-container">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Funcionário</th>
-                                                <th>Data</th>
-                                                <th>Entrada</th>
-                                                <th>Saída</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Maria Oliveira</td>
-                                                <td>13/05/2025</td>
-                                                <td>07:00</td>
-                                                <td>15:00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Carlos Souza</td>
-                                                <td>13/05/2025</td>
-                                                <td>08:00</td>
-                                                <td>16:00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Paulo Lima</td>
-                                                <td>13/05/2025</td>
-                                                <td>09:00</td>
-                                                <td>17:00</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="chart-toggle-buttons" style="justify-content: center;">
-                                    <button onclick="mostrarGraficoPonto('bar')">Horas Trabalhadas</button>
-                                    <button onclick="mostrarGraficoPonto('line')">Histórico Semanal</button>
-                                </div>
-
-                                <div class="chart-container">
-                                    <div id="graficoBarra" style="display: block;">
-                                        <canvas id="chartPontoBarra" class="chart-canvas"></canvas>
-                                    </div>
-                                    <div id="graficoLinhaPonto" style="display: none;">
-                                        <canvas id="chartPontoLinha" class="chart-canvas"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="filter-box hidden" id="filter-boxid">
+                    <div class="filtro-item">
+                        <label for="filtrofuncionario" id="Label1">Filtrar por funcionário:</label>
+                        <input type="text" id="filtrofuncionario" placeholder="Digite o nome do funcionário" />
                     </div>
-                </main>
+
+                    <div class="filtro-item" id="filtroBoxData">
+                        <label for="filtroData" id="labelFiltroData">Filtrar por data:</label>
+                        <input type="date" id="filtroData" />
+                    </div>
+                </div>
+
+
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Funcionário</th>
+                                <th>Data</th>
+                                <th>Entrada</th>
+                                <th>Saída</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Maria Oliveira</td>
+                                <td>13/05/2025</td>
+                                <td>07:00</td>
+                                <td>15:00</td>
+                            </tr>
+                            <tr>
+                                <td>Carlos Souza</td>
+                                <td>13/05/2025</td>
+                                <td>08:00</td>
+                                <td>16:00</td>
+                            </tr>
+                            <tr>
+                                <td>Paulo Lima</td>
+                                <td>13/05/2025</td>
+                                <td>09:00</td>
+                                <td>17:00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="chart-toggle-buttons" style="justify-content: center;">
+                    <button onclick="mostrarGraficoPonto('bar')">Horas Trabalhadas</button>
+                    <button onclick="mostrarGraficoPonto('line')">Histórico Semanal</button>
+                </div>
+
+                <div class="chart-container">
+                    <div id="graficoBarra" style="display: block;">
+                        <canvas id="chartPontoBarra" class="chart-canvas"></canvas>
+                    </div>
+                    <div id="graficoLinhaPonto" style="display: none;">
+                        <canvas id="chartPontoLinha" class="chart-canvas"></canvas>
+                    </div>
+                </div>
             </div>
-            <div id="footer"></div>
         </div>
     </div>
 
@@ -408,16 +393,7 @@
             }
         }
 
-        function loadHTML(elementId, url) {
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    document.getElementById(elementId).innerHTML = this.responseText;
-                }
-            };
-            xhr.open("GET", url, true);
-            xhr.send();
-        }
+
     </script>
     <script>
         function showTab(tabId) {
@@ -435,112 +411,6 @@
             });
 
             event.target.classList.add('active-tab');
-        }
-    </script>
-    <script>
-        document.getElementById("toggleSidebar").addEventListener("click", function () {
-            const sidebarDiv = document.getElementById("nav"); // Sidebar parent div
-            const toggleButton = document.getElementById("toggleSidebar");
-
-            if (sidebarDiv.style.display === "none") {
-                sidebarDiv.style.display = "flex"; // Show sidebar
-                toggleButton.style.display = "none"; // Hide button
-                sidebarItems.forEach(item => {
-                    item.style.display = "flex";
-                });
-
-            } else {
-                sidebarDiv.style.display = "none"; // Hide sidebar
-                toggleButton.style.display = "block"; // Show button
-            }
-        });
-
-        document.getElementById("toggleSidebar").addEventListener("click", function () {
-            const sidebarDiv = document.getElementById("nav");
-            const toggleButton = document.getElementById("toggleSidebar");
-
-            sidebarDiv.style.display = "flex"; // Show sidebar
-            toggleButton.style.display = "none"; // Hide toggle button
-
-            const collapseBtn = document.getElementById("collapseSidebar");
-            if (collapseBtn) {
-                collapseBtn.style.display = "block"; // Show collapse button
-            }
-        });
-
-        // Ensure sidebar auto-collapses when screen gets small
-        window.addEventListener("resize", function () {
-            const sidebarDiv = document.getElementById("nav");
-            const toggleButton = document.getElementById("toggleSidebar");
-
-            if (window.innerWidth < 600) { // Adjust as needed
-                sidebarDiv.style.display = "none";
-                toggleButton.style.display = "block"; // Show button
-            } else {
-                sidebarDiv.style.display = "flex";
-                toggleButton.style.display = "none"; // Hide button
-            }
-        });
-
-        // Run once on page load to apply correct state
-        window.dispatchEvent(new Event("resize"));
-
-
-    </script>
-
-    <script>
-        function loadHTML(elementId, url, callback) {
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    document.getElementById(elementId).innerHTML = this.responseText;
-                    if (callback) callback();
-                }
-            };
-            xhr.open("GET", url, true);
-            xhr.send();
-        }
-
-        // Load sidebar and add collapse button logic after loading
-        loadHTML('nav', 'navigation.html', function () {
-            const collapseBtn = document.getElementById("collapseSidebar");
-            if (collapseBtn) {
-                collapseBtn.addEventListener("click", function () {
-                    document.getElementById("nav").style.display = "none";
-                    document.getElementById("toggleSidebar").style.display = "block";
-                    collapseBtn.style.display = "none"; // Hide collapse button again
-                });
-            }
-        });
-
-        loadHTML('header', 'headers/headercadastropaciente.html');
-        loadHTML('footer', 'footer.html');
-    </script>
-
-
-    <script>
-        function filtrar() {
-            var filterBox = document.querySelector('.filter-boxid');
-
-            if (filterBox.classList.contains('hidden')) {
-                // Reset styles to make it visible again
-                filterBox.style.display = 'block';
-                setTimeout(() => {
-
-                    filterBox.classList.remove('hidden');
-                    filterBox.style.opacity = '1';
-                    filterBox.style.visibility = 'visible';
-                }, 10); // Tiny delay ensures display is applied before transition starts
-            } else {
-                // Start fading out
-                filterBox.style.opacity = '0';
-
-                setTimeout(() => {
-                    filterBox.classList.add('hidden');
-                    filterBox.style.visibility = 'hidden';
-                    filterBox.style.display = 'none'; // Remove from layout
-                }, 150); // Matches transition duration
-            }
         }
     </script>
 </body>

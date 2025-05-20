@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão Hospitalar - Escala de Funcionários</title>
     <link rel="stylesheet" href="CSS/stylesheet_Standard.css">
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 
@@ -67,6 +69,15 @@
                 return;
             }
 
+            // Clear current content while loading
+            document.getElementById('main-content').innerHTML = '<div class="loading">Loading...</div>';
+
+            // Get the header element reference first
+            const headerElement = document.getElementById('header');
+            if (!headerElement) {
+                console.error('Header element not found');
+            }
+
             // Load page content
             fetch(`${pageUrl}`)
                 .then(response => {
@@ -76,24 +87,56 @@
                 .then(html => {
                     document.getElementById('main-content').innerHTML = html;
 
-                    // Load CSS if specified
-                    if (cssFile) {
-                        if (currentCssLink) currentCssLink.remove();
-
-                        currentCssLink = document.createElement('link');
-                        currentCssLink.rel = 'stylesheet';
-                        currentCssLink.href = `CSS/${cssFile}`;
-                        document.head.appendChild(currentCssLink);
-                    }
+                    // Execute any scripts in the loaded content
+                    const scripts = document.getElementById('main-content').querySelectorAll('script');
+                    scripts.forEach(script => {
+                        const newScript = document.createElement('script');
+                        newScript.textContent = script.textContent;
+                        document.body.appendChild(newScript).remove();
+                    });
                 })
                 .catch(error => {
                     console.error('Page load error:', error);
                     document.getElementById('main-content').innerHTML = `
-                            <div class="error">
-                                Failed to load page: ${pageUrl}
-                                <br><small>${error.message}</small>
-                            </div>`;
+                <div class="error" style="padding: 20px; color: red;">
+                    Failed to load page: ${pageUrl}
+                    <br><small>${error.message}</small>
+                </div>`;
                 });
+
+            // Load header separately (don't wait for page content)
+            if (headerElement) {
+                const headerFileName = `${pageUrl.replace('.html', '')}.html`;
+                fetch(`headers/header${headerFileName}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            console.warn(`No header found for ${pageUrl}`);
+                            return '';
+                        }
+                        return response.text();
+                    })
+                    .then(headerHtml => {
+                        if (headerHtml) {
+                            headerElement.innerHTML = headerHtml;
+                        } else {
+                            headerElement.innerHTML = ''; // Clear if no header found
+                        }
+                    })
+                    .catch(error => {
+                        console.warn('Error loading header:', error);
+                        headerElement.innerHTML = ''; // Clear on error
+                    });
+            }
+
+            // Load CSS if specified
+            if (cssFile) {
+                if (currentCssLink) currentCssLink.remove();
+
+                currentCssLink = document.createElement('link');
+                currentCssLink.rel = 'stylesheet';
+                currentCssLink.href = `CSS/${cssFile}`;
+                document.head.appendChild(currentCssLink);
+            }
         }
 
 
@@ -176,10 +219,8 @@
                     initSidebar();
                     initNavigation();
                 })
-                .catch(error => console.error('Navigation failed:', error));
-
-            // Load other components
-            loadHTML('header', 'headers/headercadastropaciente.html');
+                .catch(error => console.error('Navigation failed:', error));       // Load other components
+            loadHTML('header', 'headers/headerajusteponto.html');
             loadHTML('main-content', 'ajustepontocontent.html');
             loadHTML('footer', 'footer.html');
         });
